@@ -2,9 +2,19 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
-        <title></title>
+        {% if Title %}
+            <title>Django Blog - {{ Title }}</title>
+        {% else %}
+            <title>  Django Blog</title>
+        {% endif %}
     </head>
     <body>
-            <h1> Notification Page</h1>
+            {% for signal in signals %}
+            <h1>{{ signal.Title }}</h1>
+            <h2>Tags:{{ signal.Tag}}</h2>
+            <p> From {{ signal.Company_name}} on {{signal.Date}}</p>
+            <p> {{ signal.Content }}</p>
+            <p> Obtained from {{signal.Link}}</p>
+            {% endfor %}
     </body>
 </html>

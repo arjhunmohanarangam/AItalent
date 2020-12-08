@@ -9,14 +9,16 @@ data_generated=[
 'Title':'data collected on tanzet',
 'Tag':'recruitment',
 'Date':'6 september 2020',
-'Content':'Recruitment of people from development industory.'
+'Content':'Recruitment of people from development industory.',
+'Link':'https://tanzet.com'
 },
 {
 'Company_name':'bluemart ',
 'Title':'data collected on bluemart',
 'Tag':'Popularity',
 'Date':'4 september 2020',
-'Content':'Came in news for catching robbers'
+'Content':'Came in news for catching robbers.',
+'Link':'https://bluemart.com'
 }
 ]
 

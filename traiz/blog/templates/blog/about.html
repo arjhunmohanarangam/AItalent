@@ -2,7 +2,11 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
-        <title></title>
+        {% if Title %}
+            <title>Django Blog - {{ Title }}</title>
+        {% else %}
+            <title>  Django Blog </title>
+        {% endif %}
     </head>
     <body>
             <h1> About Home</h1>
