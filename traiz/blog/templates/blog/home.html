@@ -6,9 +6,9 @@
     </head>
     <body>
             {% for signal in signals %}
-                <h1>{{ signal.title }}</h1>
-                <h2>Tags:{{ signal.Tag}}</h2>
-            <p> From {{ signal.Company_name}} on {{signal.date}}</p>
+            <h1>{{ signal.Title }}</h1>
+            <h2>Tags:{{ signal.Tag}}</h2>
+            <p> From {{ signal.Company_name}} on {{signal.Date}}</p>
             <p> {{ signal.Content }}</p>
             {% endfor %}
     </body>

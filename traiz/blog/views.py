@@ -19,9 +19,10 @@ data_generated=[
 'Content':'Came in news for catching robbers'
 }
 ]
+
 def dash_board(request):
     context={
-        'Signals':data_generated
+        'signals':data_generated
     }
     return render(request, 'blog/home.html', context)
 
