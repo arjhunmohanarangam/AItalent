@@ -23,7 +23,7 @@ def dash_board(request):
     context={
         'Signals':data_generated
     }
-    return render(request, 'blog/home.html',context)
+    return render(request, 'blog/home.html', context)
 
 def about(request):
     return render(request, 'blog/about.html')
