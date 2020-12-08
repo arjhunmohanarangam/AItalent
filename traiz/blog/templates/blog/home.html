@@ -5,6 +5,11 @@
         <title></title>
     </head>
     <body>
-            <h1> Blog Home</h1>
+            {% for signal in signals %}
+                <h1>{{ signal.title }}</h1>
+                <h2>Tags:{{ signal.Tag}}</h2>
+            <p> From {{ signal.Company_name}} on {{signal.date}}</p>
+            <p> {{ signal.Content }}</p>
+            {% endfor %}
     </body>
 </html>
