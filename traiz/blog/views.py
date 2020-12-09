@@ -23,10 +23,7 @@ data_generated=[
 ]
 
 def dash_board(request):
-    context={
-        'signals':data_generated
-    }
-    return render(request, 'blog/home.html', context)
+    return render(request, 'blog/home.html')
 
 def about(request):
     return render(request, 'blog/about.html')
@@ -44,4 +41,7 @@ def customer_care(request):
     return render(request, 'blog/customer_care.html')
 
 def notification(request):
-    return render(request, 'blog/notification.html')
+    context={
+        'signals':data_generated
+    }
+    return render(request, 'blog/notification.html',context)
