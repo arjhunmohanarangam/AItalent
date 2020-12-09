@@ -19,7 +19,31 @@ data_generated=[
 'Date':'4 september 2020',
 'Content':'Came in news for catching robbers.',
 'Link':'https://bluemart.com'
-}
+},
+{
+'Company_name':'tanzet ',
+'Title':'data collected on tanzet',
+'Tag':'recruitment',
+'Date':'6 september 2020',
+'Content':'Recruitment of people from development industory.',
+'Link':'https://tanzet.com'
+},
+{
+'Company_name':'tanzet ',
+'Title':'data collected on tanzet',
+'Tag':'recruitment',
+'Date':'6 september 2020',
+'Content':'Recruitment of people from development industory.',
+'Link':'https://tanzet.com'
+},
+{
+'Company_name':'tanzet ',
+'Title':'data collected on tanzet',
+'Tag':'recruitment',
+'Date':'6 september 2020',
+'Content':'Recruitment of people from development industory.',
+'Link':'https://tanzet.com'
+},
 ]
 
 def dash_board(request):
