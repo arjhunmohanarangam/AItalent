@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .forms import NameForm
+
+
 # Create your views here.
-
-
 data_generated=[
 {
 'Company_name':'tanzet ',
@@ -36,9 +37,6 @@ def dash_board(request):
 def about(request):
     return render(request, 'blog/about.html')
 
-def target_finder(request):
-    return render(request, 'blog/target_finder.html')
-
 def threat_detection(request):
     return render(request, 'blog/threat_detection.html')
 
@@ -52,4 +50,32 @@ def notification(request):
     context={
         'signals':data_generated
     }
-    return render(request, 'blog/notification.html',context)
+    return render(request, 'blog/notification.html', context)
+
+def results(request):
+    return render(request, 'blog/results.html')
+
+def target_finder(request):
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST': 
+        form = NameForm(request.POST)
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            country = form.cleaned_data['country']
+            company = form.cleaned_data['company']
+
+            print("1")        
+            print("country: " + country)    
+            print("company: " + company)    
+
+            return render(request, 'blog/results.html')
+    # if a GET (or any other method) we'll create a blank form
+    else:
+         form = NameForm()
+        
+  
+    return render(request, 'blog/target_finder.html', {'form': form})
+
+

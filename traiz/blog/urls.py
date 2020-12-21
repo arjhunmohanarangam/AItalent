@@ -8,5 +8,6 @@ urlpatterns = [
     path("threat_detection/",views.threat_detection,name="Blog-threat_detection"),
     path("license/",views.license,name="Blog-license"),
     path("customer_care/",views.customer_care,name="Blog-customer_care"),
-    path("notification/",views.notification,name="Blog-notification"),
+    path("notification/",views.notification,name="Blog-notification"),   
+    path("results/",views.results,name="Blog-results"),    
 ]

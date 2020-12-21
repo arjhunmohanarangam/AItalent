@@ -13,24 +13,28 @@
         {% if Title %}
             <title>Django Blog - {{ Title }}</title>
         {% else %}
-            <title>  Django Blog</title>
+            <title> TRAIZ SONEAN </title>
         {% endif %}
     </head>
     <body>
         <header class="site-header">
             <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
                 <div class="container">
-                    <a class="navbar-brand mr-4">TrAiZ</a>
+                    <a class="navbar-brand mr-4"></a>
+                 
                     <div class="collapse navbar-collapse" id="navbarToggle">
+                            <img style="width: 90px; height: 30px;" alt="Image description" src="{% static '\images\logo.png' %}"/>
+
                         <div class="active">
                             <div class="navbar-nav mr-auto">
-                                <a class="nav-item nav-link" href="/">Home</a>
-                                <a class="nav-item nav-link" href="/target_finder">Target Finder</a>
-                                <a class="nav-item nav-link" href="/threat_detection">Threat Detection</a>
-                                <a class="nav-item nav-link" href="/license">License</a>
-                                <a class="nav-item nav-link" href="/customer_care">Customer Care</a>
-                                <a class="nav-item nav-link" href="/notification">Notification</a>
-                                <a class="nav-item nav-link" href="/about">About</a>
+                                <a class="nav-item nav-link {% if request.path == url %}active{% endif %}" href="/">Dashboard</a>
+                                <a class="nav-item nav-link {% if request.path == url %}active{% endif %}" href="/target_finder">Target Finder</a>
+                                <a class="nav-item nav-link {% if request.path == url %}active{% endif %}" href="/threat_detection">Threat Detection</a>
+                                <a class="nav-item nav-link {% if request.path == url %}active{% endif %}" href="/license">License</a>
+                                <a class="nav-item nav-link {% if request.path == url %}active{% endif %}" href="/customer_care">Customer Care</a>
+                                <a class="nav-item nav-link {% if request.path == url %}active{% endif %}" href="/notification">Notification</a>
+                                <a class="nav-item nav-link {% if request.path == url %}active{% endif %}" href="/about">About</a>
+
                             </div>
                         </div>
         <!-- Navbar Right Side -->
