@@ -1,17 +1,4 @@
 {% extends "blog/base.html"%}
 {% block content %}
-        {% for signal in signals %}
-            <article class="media content-section">
-                <div class="media-body">
-                    <div class="article-metadata">
-                        <a class="mr-2" href="#">{{ signal.Title }}</a>
-                        <small class="text-muted">{{ signal.Date }}</small>
-                        <small class="text-muted">{{ signal.Tag }}</small>
-                    </div>
-                    <h2><a class="article-title" href="#">{{ signal.Company_name }}</a></h2>
-                    <p class="article-content">{{  signal.Content }}</p>
-                    <p class="article-content">{{  signal.Link }}</p>
-                </div>
-            </article>
-        {% endfor %}
+
 {% endblock %}

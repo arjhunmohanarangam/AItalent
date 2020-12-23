@@ -1,39 +1,56 @@
 {% extends "blog/base.html"%}
 {% block content %}
-  
- <div id="dashboard_div_eins">
+{% load crispy_forms_tags %}
+
+        <h1>New Signals Timeline</h1>
+<div id="Timeline">
+
+            <div>
+                <h5>Select a time frame:</h5>
+                <form method="Post">
+                    {% csrf_token %}
+                        {{ date }}
+                        {{ date2 }}
+                        <button id="start" type="submit">Start</button>
+                </form>
+            </div>
+
+            <div id="Timeline_Viz">
+                    <div class="newSignal"></div>
+                    <div class="newSignal"></div>
+                    <div class="newSignal"></div>
+                    <div class="newSignal"></div>  
+                    <div class="newSignal"></div>
+                    <div class="newSignal"></div>
+                    <div class="newSignal"></div>
+                    <div class="newSignal"></div>
+                    <div class="newSignal"></div>  
+                    <div class="newSignal"></div>
+                    <div class="newSignal"></div>
+                    <div class="newSignal"></div>
+                    <div class="newSignal"></div>
+                    <div class="newSignal"></div>  
+                    <div class="newSignal"></div>
+                    <div class="newSignal"></div>
+                    <div class="newSignal"></div>
+                    <div class="newSignal"></div>
+                    <div class="newSignal"></div>  
+                    <div class="newSignal"></div>
+                </div>
+</div>
+
+
+
+<div id="dashboard_div_eins">
         <h1>News:</h1>
         <h4>Filter:</h4>
-            <div class="div_dashboard">
-                    <form>
-                                <label for="fname">Company: </label><br>
-                                <textarea type="text" id="fname" name="fname" rows="1" cols="20"></textarea><br><br>
-                    </select>
-            </div>
-
-            <div class="div_dashboard">
-                <form>
-                            <label for="fname">Company: </label><br>
-                            <textarea type="text" id="fname" name="fname" rows="1" cols="20"></textarea><br><br>
-                </select>
-            </div>
-
-            <div class="div_dashboard">
-                <form>
-                            <label for="fname">Company: </label><br>
-                            <textarea type="text" id="fname" name="fname" rows="1" cols="20"></textarea><br><br>
-                </select>
-            </div>
-
-            <div class="div_dashboard">
-                <form>
-                            <label for="fname">Company: </label><br>
-                            <textarea type="text" id="fname" name="fname" rows="1" cols="20"></textarea><br><br>
-                </select>
-            </div>
-
-            <div class="NewsUndResearch">
-                <h2>Hot Topics:</h2>
+</div>  
+                   
+                    
+                
+<div>
+        <div class="NewsUndResearch">
+                <h4>Hot Topics:</h4>
                 <div class="NewsReihen"></div>  
                 <div class="NewsReihen"></div>
                 <div class="NewsReihen"></div>
@@ -44,63 +61,24 @@
                 <div class="NewsReihen"></div>
                 <div class="NewsReihen"></div>
             </div>
-
-
-            <div class="NewsUndResearch">
-                <h2>Product and Research News:</h2>
-                <div class="NewsReihen"></div>
-                <div class="NewsReihen"></div>
-                <div class="NewsReihen"></div>
-                <div class="NewsReihen"></div>
-                <div class="NewsReihen"></div>
-                <div class="NewsReihen"></div>
-                <div class="NewsReihen"></div>
-                <div class="NewsReihen"></div>
-                <div class="NewsReihen"></div>
-            </div>
-
+        
         
                     
+                        <div class="NewsUndResearch">
+                            <h4>Product and Research News:</h4>
+                            <div class="NewsReihen"></div>
+                            <div class="NewsReihen"></div>
+                            <div class="NewsReihen"></div>
+                            <div class="NewsReihen"></div>
+                            <div class="NewsReihen"></div>
+                            <div class="NewsReihen"></div>
+                            <div class="NewsReihen"></div>
+                            <div class="NewsReihen"></div>
+                            <div class="NewsReihen"></div>
+                        </div>
+                
+                    </div>  
 
-</div>
-
-<div id="Timeline">
-        <h4>New Signals Timeline:</h4>
-
-            <div>
-                <h5>Select a time frame:</h5>
-                <p class="resultsP">From:</p>
-                <input type="date" class="resultsD">
-                <p class="resultsPTo">To:</p>
-                <input type="date" class="resultsD">
-                <button id="button">OK</button>
-            </div>
-
-
-</div>
-
-<div id="Timeline_Viz">
-    <div class="newSignal"></div>
-    <div class="newSignal"></div>
-    <div class="newSignal"></div>
-    <div class="newSignal"></div>  
-    <div class="newSignal"></div>
-    <div class="newSignal"></div>
-    <div class="newSignal"></div>
-    <div class="newSignal"></div>
-    <div class="newSignal"></div>  
-    <div class="newSignal"></div>
-    <div class="newSignal"></div>
-    <div class="newSignal"></div>
-    <div class="newSignal"></div>
-    <div class="newSignal"></div>  
-    <div class="newSignal"></div>
-    <div class="newSignal"></div>
-    <div class="newSignal"></div>
-    <div class="newSignal"></div>
-    <div class="newSignal"></div>  
-    <div class="newSignal"></div>
-</div>
 
 
 
