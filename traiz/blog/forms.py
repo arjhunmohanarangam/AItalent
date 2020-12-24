@@ -1,4 +1,5 @@
 from django import forms
+from blog.models import Target_Finder_Input 
 
 class NameForm(forms.Form):
     country = forms.CharField(label='Country:', max_length=100, required=False)
@@ -9,7 +10,7 @@ class NameForm(forms.Form):
     keyword_Search = forms.CharField( widget=forms.Textarea(attrs={"rows":5, "cols":20}), label='keyword_Search:', max_length=100, required=False)
 
 
-class Proritize_Indicato(forms.Form):
+class Proritize_Indicato(forms.ModelForm):
     alliances = forms.BooleanField(label='Alliances', required=False )
     alternativeEngines = forms.BooleanField(label='Alternative Engines', required=False )
     capacityIncrease = forms.BooleanField(label='capacity Increase', required=False )
@@ -23,6 +24,11 @@ class Proritize_Indicato(forms.Form):
     productUpgrades = forms.BooleanField(label='Product Upgrades', required=False )
     reporting = forms.BooleanField(label='Reporting', required=False)
     strategy = forms.BooleanField(label='Strategy', required=False)
+
+    class Meta: 
+      model = Target_Finder_Input
+      fields = ('alliances', )
+        
 
 class DateInput(forms.DateInput):
       input_type = 'date'
