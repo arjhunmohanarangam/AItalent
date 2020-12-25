@@ -4,10 +4,12 @@
     <h1>Target Finder</h1>
     <p>Start a very specific search. When our software has found a potential target, you will be informed by a alarm pop-up. </p><br></br>
    
-                                        
-                                            <form method="POST">
-                                                <div id="div1_1">
+                                        <form method="post">
+                                                {% csrf_token %}
 
+                                            <form method="POST" action='/results/'>
+                                               
+                                                <div id="div1_1">
                                                     {% csrf_token %}
                                                     {{ form|crispy }}
                                                     {{ date }}
@@ -17,14 +19,11 @@
                                                     <div id="Indicators">
                                                             <p class="box-überschrift">Prioritize Indicators:</p>
                                                             {{ char_1|crispy }}   
-                                                       
                                                   </div>                                                
-                                                                                                     
-                                                  
-                                                 
-                                                    <button id='start' type="submit">Start</button>
-                                            </form>
-                     
+ 
+                                          
+                                            <button  id='start' type="submit">Start</button>
 
+                                        </form>
                    
 {% endblock %}

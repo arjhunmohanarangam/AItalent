@@ -36,4 +36,6 @@ class DateInput(forms.DateInput):
 class DateForm(forms.Form):
       date = forms.DateField(label='From ', required= False, widget=DateInput)
       date2 = forms.DateField(label='To ', required= False, widget=DateInput)
+      country = forms.CharField(label='Country:', max_length=100, required=False)
+      company = forms.CharField(label='Company:', max_length=100, required=False)
 
