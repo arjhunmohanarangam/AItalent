@@ -146,10 +146,6 @@ def results(request):        # if this is a POST request we need to process the 
             #  print('Indicator:' + varialeAlliance + '_cut_')
         if date.is_valid():
             print('input from result page:')
-            country = date.cleaned_data['country']
-            company = date.cleaned_data['company']
-            print(country)
-            print(company)
             date1= request.POST.getlist('date')
             date2 = request.POST.getlist('date2')
             print(date1)
@@ -280,13 +276,6 @@ def target_finder(request):
     return render(request, 'blog/target_finder.html', {
         'form': form,
         'char_1': char_1})
-
-
-class CreateMyModelView():
-    model = MyModel
-    form_class = MyModelForm
-    template_name = 'blog/target_finder.html'
-    success_url = 'blog/target_finder.html'
 
 
   
