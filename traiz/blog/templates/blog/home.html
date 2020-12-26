@@ -2,15 +2,36 @@
 {% block content %}
 {% load crispy_forms_tags %}
 
+
+
+
+
         <h1>New Signals Timeline</h1>
-<div id="Timeline">
+        <br>
+        <div >
+                <p>This is the list of countires and companies available in the Dataset. <br> You can choose them by writing them inside the fields below  </p>
+                    <select>
+                      {% for type in primary_type%}
+                      <option value="{{ type }}">{{ type }}</option>
+                      {% endfor %}
+                    </select>
+                    <select>
+                        {% for type in primary_type2%}
+                        <option value="{{ type }}">{{ type }}</option>
+                            {% endfor %}
+                          </select>
+                </div>
+                <iframe width="100%" height="500" frameborder="0"
+                src="https://observablehq.com/embed/@sanniclara/coding-project-6th-semster-of-interactive-media-design-v3-m?cell=*"></iframe> <div id="Timeline">
 
             <div>
+                   
                 <h5>Select a time frame:</h5>
                 <form method="Post">
+                       
                     {% csrf_token %}
+                        {{ date.date }}
                         {{ date }}
-                        {{ date2 }}
                         <button id="start" type="submit">Start</button>
                 </form>
             </div>
@@ -77,8 +98,6 @@
                         </div>
                 
                     </div>  
-
-
 
 
 

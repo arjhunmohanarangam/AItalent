@@ -15,3 +15,16 @@ class Target_Finder_Input(models.Model):
     #productUpgrades = models.BooleanField(max_length=500)
     #reporting = models.BooleanField(max_length=500)
     #strategy = models.BooleanField(max_length=500)
+
+
+
+COLOR_CHOICES = (
+    ('green','GREEN'),
+    ('blue', 'BLUE'),
+    ('red','RED'),
+    ('orange','ORANGE'),
+    ('black','BLACK'),
+)
+
+class MyModel(models.Model):
+  color = models.CharField(max_length=6, choices=COLOR_CHOICES, default='green')

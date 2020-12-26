@@ -214,7 +214,6 @@ margin-left: 25px;
   border: 0px;
 
 }
-  
 
 /* -------- dashboard page -------------*/
 
@@ -356,4 +355,25 @@ a.article-title:hover {
 
 .account-heading {
   font-size: 2.5rem;
+}
+
+
+/* -------- about -------------*/
+
+.profil_Bilder{
+  width: 30%;
+  float: left;
+
+}
+
+.pitch_video{
+  height: 200px;
+  width: 600px;
+  float: left;
+}
+
+.sonean{
+  height: 200px;
+  width: 600px;
+  float: left;
 }

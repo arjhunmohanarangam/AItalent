@@ -1,5 +1,5 @@
 from django import forms
-from blog.models import Target_Finder_Input 
+from blog.models import Target_Finder_Input, MyModel
 
 class NameForm(forms.Form):
     country = forms.CharField(label='Country:', max_length=100, required=False)
@@ -33,9 +33,17 @@ class Proritize_Indicato(forms.ModelForm):
 class DateInput(forms.DateInput):
       input_type = 'date'
 
+
+
 class DateForm(forms.Form):
       date = forms.DateField(label='From ', required= False, widget=DateInput)
-      date2 = forms.DateField(label='To ', required= False, widget=DateInput)
-      country = forms.CharField(label='Country:', max_length=100, required=False)
+      date = forms.DateField(label=' | ', required= False, widget=DateInput)
+      country = forms.CharField(label='Country:',max_length=100, required=False)
       company = forms.CharField(label='Company:', max_length=100, required=False)
+
+
+class MyModelForm(forms.ModelForm):
+    class Meta:
+        model = MyModel
+        fields = ['color']
 

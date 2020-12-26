@@ -8,7 +8,10 @@
                 <h5>Select a time frame:</h5>
                 <form method="Post">
                     {% csrf_token %}
+                    {{ date.date }}
                         {{ date }}
+                        
+
                         <button  id="start" type="submit">Start</button>
                 </form>
             </div>  
@@ -16,6 +19,7 @@
             <div id="resutls_viz">
                     <p>Word Cloud Visualisation & Company Listing</p>
                 </div>
+                
 </div>
 
 

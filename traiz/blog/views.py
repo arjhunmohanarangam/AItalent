@@ -1,8 +1,11 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .forms import NameForm, Proritize_Indicato, DateForm
+from .forms import NameForm, Proritize_Indicato, DateForm, MyModelForm
 import csv
 from blog import models 
+from .models import MyModel
+import pandas as pd
+
 
 
 
@@ -34,10 +37,36 @@ data_generated=[
 }
 ]
 
+
+
+df = pd.read_csv('blog\Country_data_base.CSV' , encoding= 'latin-1')
+print(df)
+print(df.columns.tolist())
+print (df)
+columns = df.columns
+primary_type = df['Countries'].unique()
+
+df2  = pd.read_csv('blog\countries_data.CSV' , encoding= 'latin-1')
+print(df2)
+print(df2.columns.tolist())
+columns2 = df2.columns
+primary_type2 = df2['Name (Organization)'].unique()
+
+
+#context = {'primary_type': primary_type, 'columns': columns}
+#df2 = pd.read_csv("blog\Company_data_base.CSV")
+#print(df2.columns.tolist())
+#print (df2)
+#columns2 = df2.columns
+#primary_type2 = df2['company'].unique()
+#context = {'primary_type': primary_type, 'columns': columns}
+
 def dash_board(request):
+
         # if this is a POST request we need to process the form data
     if request.method == 'POST': 
         date = DateForm(request.POST)
+        print(request.POST)
 
         if date.is_valid():
             #country = form.cleaned_data['country']
@@ -51,20 +80,26 @@ def dash_board(request):
             company = date.cleaned_data['company']
             print('Country:' + country)
             print(company)
-            date1= request.POST.getlist('date')
-            date2 = request.POST.getlist('date2')
+            date1= request.POST.getlist('date') # retruns the timefram as ['date', 'date']
             print(date1)
-            print(date2)
+            print(request.POST)
            
+            
+
+          
 
 
 
     else:
          date = DateForm()
+         model = MyModel()
 
-    return render(request, 'blog/home.html', {
-        'date' : date
-    })
+    return render(request, 'blog/home.html',
+     {'date': date, 
+    'primary_type': primary_type,
+    'columns': columns, 
+    'primary_type2': primary_type2,
+    'columns2': columns2})
 
 
 
@@ -135,6 +170,7 @@ def target_finder(request):
         form = NameForm(request.POST)
         char_1 = Proritize_Indicato(request.POST)
         date = DateForm(request.POST)
+
         
     
 
@@ -244,6 +280,14 @@ def target_finder(request):
     return render(request, 'blog/target_finder.html', {
         'form': form,
         'char_1': char_1})
+
+
+class CreateMyModelView():
+    model = MyModel
+    form_class = MyModelForm
+    template_name = 'blog/target_finder.html'
+    success_url = 'blog/target_finder.html'
+
 
   
 
