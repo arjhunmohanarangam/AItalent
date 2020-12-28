@@ -1,4 +1,28 @@
 {% extends "blog/base.html"%}
+{% load static %}
+
 {% block content %}
-    <h1>Policy</h1>
+    <div id="policy" >
+            <h1>Policy</h1>
+            <h5>We believe in Human Labour</h5>
+
+        <p >
+            Manual work still is and always will be important. This also applies to our product. Without human labour it is not possible to continue this product. Also, data and the decision about data will always be given in the hands of humans. That is our team policy. As developers of this product, we promise to handle all our data responsibly. 
+            We only use accessible data and do not violate any intellectual property rights with our product. <br></br>
+Furthermore, we always want to use human competence in data processing. Counter-checking and selecting is still a human task that must be done by qualified workers to ensure the quality of our product. Especially on the dashboard side, the domain competence of individuals cannot be dispensed with. With our product we want to strengthen the preservation of jobs. 
+
+        </p>
+
+        <h5>Fairness</h5>
+
+        <p >
+                We believe in equal rights for all. This means that our product does not support or promote restrictions on freedom, racism and crime. We consciously work with our data against prejudice and fraud. For us, 
+                aggregating high quality data also means taking action against fake news and looking very closely at it. 
+        </p>
+
+
+    </div>
+
+    <img  id="Logo_Policy" style="width: 260px; height: 95px;" alt="Image description" src="{% static '\images\logo.png' %}"/>
+
 {% endblock %}
