@@ -30,9 +30,12 @@ ul {
 
 /* --------!!!  target finder page  !!!-------*/
 
-
+.col-md-8{
+  width:100%;
+}
 /* The container */
 .container_in {
+  width:100%;
   display: block;
   position: relative;
   padding-left: 35px;
@@ -160,7 +163,7 @@ font-size: 15px;
   background-color: #316F73;
   color: white;
   font-family: Muli;
-  float: right;
+  float: left;
   width: 105px;
   height: 35px;
   text-decoration: none; 
