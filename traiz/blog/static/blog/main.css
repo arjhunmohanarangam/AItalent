@@ -364,24 +364,51 @@ a.article-title:hover {
 /* -------- about -------------*/
 
 .profil_Bilder{
-  width: 30%;
+  width: 33%;
   float: left;
 
 }
 
 .pitch_video{
   height: 200px;
-  width: 600px;
+  width: 100%;
   float: left;
 }
 
 .sonean{
   height: 200px;
-  width: 600px;
+  width: 100%;
+  float :left;
+  margin-bottom: 300px;
+  padding-top: 30px;
+
+}
+
+#video{
+  width: 50%;
+  float :left;
+}
+
+.value_P{
+  float: left;
+  width: 40%;
+  margin-top: 60px;
+  margin-left: 20px;
+}
+
+#Tools{
+  width: 100%;
   float: left;
 }
 
+.text{
+  width:70%;
+}
 
+.Link_Google{
+  width:100;
+  float: left;
+}
 
 
 /* --------!!!  policy !!!-------*/
