@@ -7,18 +7,27 @@
             <div>
                 <h5>Select a time frame:</h5>
                 <form method="Post">
+                    <div>
                     {% csrf_token %}
                     {{ date.date }}
                         {{ date }}
-                        
+
+                    </div>
+                        <div id="resutls_viz">
+                                <p>Word Cloud Visualisation & Company Listing</p>
+                            </div>
+                            <div>
+                                    <p class="box-überschrift">Prioritize Indicators:</p>
+            
+                                {{ char_1|crispy }}   
+                            </div>
 
                         <button  id="start" type="submit">Start</button>
                 </form>
             </div>  
             <br>
-            <div id="resutls_viz">
-                    <p>Word Cloud Visualisation & Company Listing</p>
-                </div>
+          
+
                 
 </div>
 
