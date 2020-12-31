@@ -279,6 +279,5 @@ def target_finder(request):
 def pri():
     print(Variable_FORM)
     print(Keys_FORM)
-    print(Variable_FORM)
     del Variable_FORM[0]
     del Keys_FORM[0]
