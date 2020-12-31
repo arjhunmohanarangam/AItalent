@@ -9,7 +9,6 @@ class NameForm(forms.Form):
     main_Market = forms.CharField(label='Main Market:', max_length=100, required=False)
     keyword_Search = forms.CharField( widget=forms.Textarea(attrs={"rows":5, "cols":20}), label='keyword_Search:', max_length=100, required=False)
 
-
 class Proritize_Indicato(forms.ModelForm):
     alliances = forms.BooleanField(label='Alliances', required=False )
     alternativeEngines = forms.BooleanField(label='Alternative Engines', required=False )
@@ -25,10 +24,10 @@ class Proritize_Indicato(forms.ModelForm):
     reporting = forms.BooleanField(label='Reporting', required=False)
     strategy = forms.BooleanField(label='Strategy', required=False)
 
-    class Meta: 
+    class Meta:
       model = Target_Finder_Input
       fields = ('alliances', )
-        
+
 
 class DateInput(forms.DateInput):
       input_type = 'date'
@@ -46,4 +45,3 @@ class MyModelForm(forms.ModelForm):
     class Meta:
         model = MyModel
         fields = ['color']
-

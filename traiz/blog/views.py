@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .forms import NameForm, Proritize_Indicato, DateForm, MyModelForm
 import csv
-from blog import models 
+from blog import models
 from .models import MyModel
 import pandas as pd
 
@@ -21,7 +21,7 @@ import pandas as pd
 def dash_board(request):
 
         # if this is a POST request we need to process the form data
-    if request.method == 'POST': 
+    if request.method == 'POST':
         date = DateForm(request.POST)
         print(request.POST)
 
@@ -71,7 +71,7 @@ def notification(request):
 
 def results(request):        # if this is a POST request we need to process the form data
         # if this is a POST request we need to process the form data
-    if request.method == 'POST': 
+    if request.method == 'POST':
         date = DateForm(request.POST)
         char_1 = Proritize_Indicato(request.POST)
 
@@ -84,7 +84,7 @@ def results(request):        # if this is a POST request we need to process the 
             alternativeEngines = char_1['alternativeEngines']
             capacityIncrease = char_1['capacityIncrease']
             companyLaunch = char_1['companyLaunch']
-            corporateFinance = char_1['corporateFinance'] 
+            corporateFinance = char_1['corporateFinance']
             corporateMA = char_1['corporateMA']
             humanResource = char_1['humanResource']
             presicionTechnology = char_1['presicionTechnology']
@@ -94,96 +94,104 @@ def results(request):        # if this is a POST request we need to process the 
             reporting =  char_1['reporting']
             strategy = char_1['strategy']
 
-            if request.POST.getlist('alliances'): 
+            if request.POST.getlist('alliances'):
                     varialeAlliance = 'Alliance'
                     print('Indicator:' + varialeAlliance)
 
-            if request.POST.getlist('alternativeEngines'): 
+            if request.POST.getlist('alternativeEngines'):
                     varialealternativeEngines = 'Alternative Engines'
                     print('Indicator:' + varialealternativeEngines)
 
-            if request.POST.getlist('capacityIncrease'): 
+            if request.POST.getlist('capacityIncrease'):
                     varialecapacityIncrease = 'Capacity Increase'
                     print('Indicator:' + varialecapacityIncrease )
-            
-            if request.POST.getlist('companyLaunch'): 
+
+            if request.POST.getlist('companyLaunch'):
                     varialecompanyLaunch = 'Company Launch'
                     print('Indicator:' + varialecompanyLaunch)
-                
-            if request.POST.getlist('corporateFinance'): 
+
+            if request.POST.getlist('corporateFinance'):
                     varialecorporateFinance = 'Corporate Finance'
                     print('Indicator:' + varialecorporateFinance )
-                
-            if request.POST.getlist('corporateMA'): 
+
+            if request.POST.getlist('corporateMA'):
                     varialecorporateMA = 'Corporate M&A'
                     print('Indicator:' + varialecorporateMA )
 
-            if request.POST.getlist('humanResource'): 
+            if request.POST.getlist('humanResource'):
                     varialehumanResource = 'Human Resource'
                     print('Indicator:' + varialehumanResource )
 
-            if request.POST.getlist('presicionTechnology'): 
+            if request.POST.getlist('presicionTechnology'):
                     varialepresicionTechnology = 'Presicion Technology'
                     print('Indicator:' + varialepresicionTechnology )
 
-            if request.POST.getlist('innovation'): 
+            if request.POST.getlist('innovation'):
                     varialeinnovation = 'Innovation'
                     print('Indicator:' + varialeinnovation )
 
-            if request.POST.getlist('productLaunches'): 
+            if request.POST.getlist('productLaunches'):
                     varialeproductLaunches = 'Product Launch'
-                    print('Indicator:' + varialeproductLaunches ) 
+                    print('Indicator:' + varialeproductLaunches )
 
-            if request.POST.getlist('productUpgrades'): 
+            if request.POST.getlist('productUpgrades'):
                     varialeproductUpgrades = 'Product Upgrade'
                     print('Indicator:' + varialeproductUpgrades )
 
-            if request.POST.getlist('reporting'): 
+            if request.POST.getlist('reporting'):
                     varialereporting = 'Reporting'
-                    print('Indicator:' + varialereporting )  
+                    print('Indicator:' + varialereporting )
 
-            if request.POST.getlist('strategy'): 
+            if request.POST.getlist('strategy'):
                     varialestrategy = 'Strategy'
-                    print('Indicator:' + varialestrategy)  
-            
+                    print('Indicator:' + varialestrategy)
 
-           
+
+
     else:
         date = DateForm()
         char_1 = Proritize_Indicato()
 
 
-    return render(request, 'blog/results.html', { 
-        'date' : date, 
+    return render(request, 'blog/results.html', {
+        'date' : date,
         'char_1': char_1
     })
 
-    
 
+country=""
+company=""
+keyword_Search=""
+Variable_FORM=[]
+Keys_FORM=[]
 def target_finder(request):
     # if this is a POST request we need to process the form data
-    if request.method == 'POST': 
+    if request.method == 'POST':
         form = NameForm(request.POST)
         char_1 = Proritize_Indicato(request.POST)
         date = DateForm(request.POST)
 
-        
-    
+
+
 
         if form.is_valid() or char_1.is_valid():
                 country = form.cleaned_data['country']
+                #Variable_FORM[0]=country
+                #Variable_FORM.append(country)
                 company = form.cleaned_data['company']
+                Variable_FORM.append([country,company])
                 industry = form.cleaned_data['industry']
                 segment_Spezialication = form.cleaned_data['segment_Spezialication']
                 main_Market = form.cleaned_data['main_Market']
                 keyword_Search = form.cleaned_data['keyword_Search']
+                Keys_FORM.append(keyword_Search.split(","))
 
 
                 charrty = char_1['alliances']
                 alternativeEngines = char_1['alternativeEngines']
                 capacityIncrease = char_1['capacityIncrease']
                 companyLaunch = char_1['companyLaunch']
-                corporateFinance = char_1['corporateFinance'] 
+                corporateFinance = char_1['corporateFinance']
                 corporateMA = char_1['corporateMA']
                 humanResource = char_1['humanResource']
                 presicionTechnology = char_1['presicionTechnology']
@@ -193,83 +201,83 @@ def target_finder(request):
                 reporting =  char_1['reporting']
                 strategy = char_1['strategy']
 
-    
-                print(country)
-                print(company)
-                print(industry)
-                print(segment_Spezialication)
-                print(main_Market)
-                print(keyword_Search)
-                print(request.POST)
+
+                #print(country)
+                #print(company)
+                #print(industry)
+                #print(segment_Spezialication)
+                #print(main_Market)
+                #print(keyword_Search)
+                pri()
 
                 #print(request.POST)
                 #print( 'alliance:' + str(request.POST.getlist('alliances')))
-                if request.POST.getlist('alliances'): 
+                if request.POST.getlist('alliances'):
                     varialeAlliance = 'Alliance'
                     print('Indicator:' + varialeAlliance)
 
-                if request.POST.getlist('alternativeEngines'): 
+                if request.POST.getlist('alternativeEngines'):
                     varialealternativeEngines = 'Alternative Engines'
                     print('Indicator:' + varialealternativeEngines)
 
-                if request.POST.getlist('capacityIncrease'): 
+                if request.POST.getlist('capacityIncrease'):
                     varialecapacityIncrease = 'Capacity Increase'
                     print('Indicator:' + varialecapacityIncrease )
-            
-                if request.POST.getlist('companyLaunch'): 
+
+                if request.POST.getlist('companyLaunch'):
                     varialecompanyLaunch = 'Company Launch'
                     print('Indicator:' + varialecompanyLaunch)
-                
-                if request.POST.getlist('corporateFinance'): 
+
+                if request.POST.getlist('corporateFinance'):
                     varialecorporateFinance = 'Corporate Finance'
                     print('Indicator:' + varialecorporateFinance )
-                
-                if request.POST.getlist('corporateMA'): 
+
+                if request.POST.getlist('corporateMA'):
                     varialecorporateMA = 'Corporate M&A'
                     print('Indicator:' + varialecorporateMA )
 
-                if request.POST.getlist('humanResource'): 
+                if request.POST.getlist('humanResource'):
                     varialehumanResource = 'Human Resource'
                     print('Indicator:' + varialehumanResource )
 
-                if request.POST.getlist('presicionTechnology'): 
+                if request.POST.getlist('presicionTechnology'):
                     varialepresicionTechnology = 'Presicion Technology'
                     print('Indicator:' + varialepresicionTechnology )
 
-                if request.POST.getlist('innovation'): 
+                if request.POST.getlist('innovation'):
                     varialeinnovation = 'Innovation'
                     print('Indicator:' + varialeinnovation )
 
-                if request.POST.getlist('productLaunches'): 
+                if request.POST.getlist('productLaunches'):
                     varialeproductLaunches = 'Product Launch'
-                    print('Indicator:' + varialeproductLaunches ) 
+                    print('Indicator:' + varialeproductLaunches )
 
-                if request.POST.getlist('productUpgrades'): 
+                if request.POST.getlist('productUpgrades'):
                     varialeproductUpgrades = 'Product Upgrade'
                     print('Indicator:' + varialeproductUpgrades )
 
-                if request.POST.getlist('reporting'): 
+                if request.POST.getlist('reporting'):
                     varialereporting = 'Reporting'
-                    print('Indicator:' + varialereporting )  
+                    print('Indicator:' + varialereporting )
 
-                if request.POST.getlist('strategy'): 
+                if request.POST.getlist('strategy'):
                     varialestrategy = 'Strategy'
-                    print('Indicator:' + varialestrategy)  
+                    print('Indicator:' + varialestrategy)
 
                 return redirect('/results/')
-       
+
 
     # if a GET (or any other method) we'll create a blank form
     else:
          form = NameForm()
          char_1 = Proritize_Indicato()
 
-  
+
     return render(request, 'blog/target_finder.html', {
         'form': form,
         'char_1': char_1})
-
-
-  
-
-
+def pri():
+    print(Variable_FORM)
+    print(Keys_FORM)
+    del Variable_FORM[0]
+    del Keys_FORM[0]
