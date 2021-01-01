@@ -5,7 +5,14 @@ import csv
 from blog import models
 from .models import MyModel
 import pandas as pd
-data_updated=pd.read_excel("updated.xlsx")
+import matplotlib.pyplot as plt
+from nltk.tokenize import sent_tokenize
+import re
+from wordcloud import WordCloud, STOPWORDS
+import io
+import urllib, base64
+
+data_updated=pd.read_excel("/Users/arjhunmohanarangam/Documents/GitHub/AItalents/traiz/blog/updated.xlsx")
 countries_var=""
 company=""
 keyword_Search=""
@@ -274,7 +281,7 @@ def target_finder(request):
                 #print(request.POST)
                 #print( 'alliance:' + str(request.POST.getlist('alliances')))
                 if request.POST.getlist('alliances'):
-                    varialeAlliance = 'Alliance'
+                    varialeAlliance = 'Alliances'
                     Indicator_FORM.append(varialeAlliance)
 
                 if request.POST.getlist('alternativeEngines'):
@@ -299,11 +306,11 @@ def target_finder(request):
                     Indicator_FORM.append(varialecorporateMA)
 
                 if request.POST.getlist('humanResource'):
-                    varialehumanResource = 'Human Resource'
+                    varialehumanResource = 'Human Resources'
                     Indicator_FORM.append(varialehumanResource)
 
                 if request.POST.getlist('presicionTechnology'):
-                    varialepresicionTechnology = 'Presicion Technology'
+                    varialepresicionTechnology = 'Precision Technology'
                     Indicator_FORM.append(varialepresicionTechnology)
 
                 if request.POST.getlist('innovation'):
@@ -311,11 +318,11 @@ def target_finder(request):
                     Indicator_FORM.append(varialeinnovation)
 
                 if request.POST.getlist('productLaunches'):
-                    varialeproductLaunches = 'Product Launch'
+                    varialeproductLaunches = 'Product Launches'
                     Indicator_FORM.append(varialeproductLaunches)
 
                 if request.POST.getlist('productUpgrades'):
-                    varialeproductUpgrades = 'Product Upgrade'
+                    varialeproductUpgrades = 'Product Upgrades'
                     Indicator_FORM.append(varialeproductUpgrades)
 
                 if request.POST.getlist('reporting'):
@@ -341,7 +348,6 @@ def target_finder(request):
                 #Indicator_FORM.append([varialeAlliance[0], varialealternativeEngines[0], varialecapacityIncrease[0], varialecompanyLaunch[0], varialecorporateFinance[0], varialecorporateMA, varialehumanResource, varialepresicionTechnology, varialeinnovation, varialeproductLaunches, varialeproductUpgrades, varialereporting, varialestrategy])
 
                 integration()
-
                 return redirect('/results/')
 
 
@@ -360,10 +366,102 @@ def target_finder(request):
 
 
 def integration():
-    print(Variable_FORM)
-    print(Keys_FORM)
-    print(Indicator_FORM)
-    print(data_updated)
+    #print(Variable_FORM)
+    #print(Keys_FORM)
+    #print(Indicator_FORM)
+    selected_country_data=data_updated[data_updated["Name (Country)"]==Variable_FORM[0][0]]
+    selected_company_data=selected_country_data[selected_country_data["Name (Organization)"]==Variable_FORM[0][1]]
+    if selected_company_data.empty:
+        message="no companyies found"
+    result = pd.DataFrame()
+    for i in Indicator_FORM:
+        dada=selected_country_data[selected_country_data["Name (Source Tag)"]== i]
+        result=pd.concat([result,dada])
+    Wn=len(Indicator_FORM)
+    unique_comp=result["Name (Organization)"].unique()
+    #print(unique_comp)
+    bn=0
+    comp_name=[]
+    number_signals=[]
+    comp_score=[]
+    for comp in unique_comp:
+        df_Comp=result[result["Name (Organization)"]==comp]
+        Sn=df_Comp["Name (Organization)"].count()
+        for item in Indicator_FORM:
+            item1=df_Comp[df_Comp["Name (Source Tag)"]== item]
+            value=item1["Name (Organization)"].count()
+            if value > 0:
+                bn=bn+1
+        score= Sn*0.8+Sn*0.2*bn/Wn #score calculation
+        comp_name.append(comp)
+        number_signals.append(Sn)
+        comp_score.append(score)
+        #print("Bn value=",bn)
+        #print("Sn value=",Sn)
+        #print("Wn value=", Wn)
+        bn=0
+        #print(score)
+    data_new = {'Company_name':comp_name,
+        'Number_of_signals':number_signals,
+        'Score':comp_score}#new dataframe for only the output
+    score_data = pd.DataFrame(data_new)
+    score_data=score_data.sort_values(by=['Score'], ascending=False)
+
+
+    fig = plt.figure(figsize=(20,10))
+    ax1 = fig.add_subplot(121)
+    ax1.bar(score_data["Company_name"],score_data["Score"])
+    plt.xticks(rotation=50)
+    plt.xlabel("Country of Origin")
+    plt.ylabel("Number of Wines")
+    plt.savefig('books_read.png')
+    #print(selected_company_data)
+    score_data=score_data.drop(['Score'], axis=1)
+    print(score_data)
+    cloud("Claas")
     del Variable_FORM[0]
     del Keys_FORM[0]
     del Indicator_FORM[0:]
+    return score_data
+
+def cloud(companyname):
+    selected_country_data=data_updated[data_updated["Name (Country)"]==Variable_FORM[0][0]]
+    selected_company_data=selected_country_data[selected_country_data["Name (Organization)"]==companyname]
+    result = pd.DataFrame()
+    #print(Indicator_FORM)
+    for i in Indicator_FORM:
+        dada=selected_company_data[selected_company_data["Name (Source Tag)"]== i]
+        #print(dada)
+        result=pd.concat([result,dada])
+    #print(result["Content"])
+    textclo=[]
+    resl=result["Content"]
+    for txt in resl:
+        sent=sent_tokenize(txt)
+        #print(sent)
+        for sen in sent:
+            textclo.append(sen)
+    #print(textclo)
+    sentan=" ".join(textclo)
+    #print(sentan)
+    #text = re.sub(r'==.*?==+', '', sentan)
+    #plt.figure(figsize=(40, 30))
+    wc = WordCloud().generate(sentan)
+    plt.figure(figsize=(40, 30))
+    plt.imshow(wc, interpolation='bilinear')
+    plt.axis("off")
+    plt.savefig('books_read1.png')
+    image = io.BytesIO()
+    plt.savefig(image, format='png')
+    image.seek(0)  # rewind the data
+    string = base64.b64encode(image.read())
+
+    image_64 = 'data:image/png;base64,' + urllib.parse.quote(string)
+    return image_64
+
+
+def cloud_gen(request):
+    '''Your code'''
+
+    wordcloud = word_cloud(text)
+    #return render(request, 'articles/index.html', {'wordcloud':wordcloud}

@@ -1,7 +1,7 @@
 from django.db import models
 import pandas as pd
 
-csvRead = pd.read_csv('blog/Company_data_base.csv', encoding='latin-1',  skipinitialspace=True) 
+csvRead = pd.read_csv('blog/Company_data_base.csv', encoding='latin-1',  skipinitialspace=True)
 # header = next(reader)
 print(csvRead)
 
@@ -33,10 +33,10 @@ COLOR_CHOICES = [
     ('Bangladesh', 'Bangladesh'),
     ('Belarus','Belarus'),
     ('Belgium','Belgium'),
-    ('Bolivia','Bolivia'), 
+    ('Bolivia','Bolivia'),
     ('Brazil','Brazil'),
     ('Bulgaria','Bulgaria'),
-    ('Burundi','Burundi'), 
+    ('Burundi','Burundi'),
     ('Canada','Canada'),
     ('Chile','Chile'),
     ('China','China'),
@@ -50,10 +50,10 @@ COLOR_CHOICES = [
     ('Germany','Germany'),
     ('Ghana','Ghana'),
     ('Iceland','Iceland'),
-    ('India','India'), 
+    ('India','India'),
     ('India','India'),
     ('Iran','Iran'),
-    ('Hungary','Hungary'), 
+    ('Hungary','Hungary'),
     ('Ireland','Ireland'),
     ('Israel','Israel'),
     ('Italy','Italy'),
@@ -65,10 +65,10 @@ COLOR_CHOICES = [
     ('Lithuania', 'Lithuania'),
     ('Luxembourg','Luxembourg'),
     ('Mexico','Mexico'),
-    ('Morocco','Morocco'), 
+    ('Morocco','Morocco'),
     ('Netherlands','Netherlands'),
     ('New Zealand','New Zealand'),
-    ('Nigeria','Nigeria'), 
+    ('Nigeria','Nigeria'),
     ('Norway','Norway'),
     ('Peru','Peru'),
     ('Poland','Poland'),
@@ -80,18 +80,18 @@ COLOR_CHOICES = [
     ('Singapore', 'Singapore'),
     ('Slovakia','Slovakia'),
     ('Slovenia','Slovenia'),
-    ('South Africa','South Africa'), 
+    ('South Africa','South Africa'),
     ('South Korea','South Korea'),
     ('Spain','Spain'),
-    ('Sudan','Sudan'), 
+    ('Sudan','Sudan'),
     ('Sweden','Sweden'),
     ('Switzerland','Switzerland'),
     ('Tanzania','Tanzania'),
     ('Thailand','Thailand'),
-    ('Turkey','Turkey'), 
+    ('Turkey','Turkey'),
     ('Turkmenistan','Turkmenistan'),
     ('Ukraine','Ukraine'),
-    ('United Arab Emirates','United Arab Emirates'), 
+    ('United Arab Emirates','United Arab Emirates'),
     ('United Kingdom','United Kingdom'),
     ('United States','United States'),
     ('Uruguay','Uruguay'),
@@ -130,7 +130,7 @@ Company_Chioces = [
     ('Agrian','Agrian'),
     ('AgriArgo Ibérica','AgriArgo Ibérica'),
     ('Agri-Epi Centre','Agri-Epi Centre'),
-    ('Agrifac (Exel Industries)','Agrifac (Exel Industries)'), 
+    ('Agrifac (Exel Industries)','Agrifac (Exel Industries)'),
     ('Agrifac Machinery B.V.','Agrifac Machinery B.V.'),
     ('Agrimulsa','Agrimulsa'),
     ('Agrisem International S.A.S.','Agrisem International S.A.S.'),
@@ -744,4 +744,3 @@ Company_Chioces = [
 class MyModel(models.Model):
    Countries = models.CharField( max_length=300, choices=COLOR_CHOICES, default='--type in a Country name --')
    Companies = models.CharField( max_length=300, choices=Company_Chioces, default='--type in a Company name --')
-
