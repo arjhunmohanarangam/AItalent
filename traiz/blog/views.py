@@ -40,14 +40,14 @@ def dash_board(request):
             date1= request.POST.getlist('date') # retruns the timefram as ['date', 'date']
             print(date1)
             print(request.POST)
-
+            
 
     else:
          date = DateForm()
-         model = MyModel()
 
     return render(request, 'blog/home.html',
-     {'date': date})
+     {'date': date,
+      })
 
 
 
@@ -75,7 +75,8 @@ def results(request):        # if this is a POST request we need to process the 
         date = DateForm(request.POST)
         char_1 = Proritize_Indicato(request.POST)
 
-        if date.is_valid() or char_1.is_valid():
+
+        if date.is_valid() or char_1.is_valid() :
             print('input from result page:')
             date1= request.POST.getlist('date')
             date2 = request.POST.getlist('date2')
@@ -93,7 +94,9 @@ def results(request):        # if this is a POST request we need to process the 
             productUpgrades = char_1['productUpgrades']
             reporting =  char_1['reporting']
             strategy = char_1['strategy']
+          
 
+           
             if request.POST.getlist('alliances'):
                     varialeAlliance = 'Alliance'
                     print('Indicator:' + varialeAlliance)
@@ -153,9 +156,10 @@ def results(request):        # if this is a POST request we need to process the 
         char_1 = Proritize_Indicato()
 
 
+
     return render(request, 'blog/results.html', {
         'date' : date,
-        'char_1': char_1
+        'char_1': char_1, 
     })
 
 
@@ -164,27 +168,32 @@ company=""
 keyword_Search=""
 Variable_FORM=[]
 Keys_FORM=[]
+
 def target_finder(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         form = NameForm(request.POST)
         char_1 = Proritize_Indicato(request.POST)
         date = DateForm(request.POST)
+        model = MyModelForm(request.POST)
 
 
 
 
-        if form.is_valid() or char_1.is_valid():
-                country = form.cleaned_data['country']
+        if form.is_valid() or char_1.is_valid() or model.is_valid():
                 #Variable_FORM[0]=country
                 #Variable_FORM.append(country)
-                company = form.cleaned_data['company']
                 Variable_FORM.append([country,company])
                 industry = form.cleaned_data['industry']
                 segment_Spezialication = form.cleaned_data['segment_Spezialication']
                 main_Market = form.cleaned_data['main_Market']
                 keyword_Search = form.cleaned_data['keyword_Search']
                 Keys_FORM.append(keyword_Search.split(","))
+                countries_var = request.POST.getlist('Countries')
+                company_var = request.POST.getlist('Companies')
+                print(company_var)
+                print(countries_var)
+
 
 
                 charrty = char_1['alliances']
@@ -271,11 +280,15 @@ def target_finder(request):
     else:
          form = NameForm()
          char_1 = Proritize_Indicato()
+         model = MyModelForm()
 
 
     return render(request, 'blog/target_finder.html', {
         'form': form,
-        'char_1': char_1})
+        'char_1': char_1, 
+        'model' : model
+    })
+
 def pri():
     print(Variable_FORM)
     print(Keys_FORM)

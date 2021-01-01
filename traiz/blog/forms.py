@@ -2,8 +2,8 @@ from django import forms
 from blog.models import Target_Finder_Input, MyModel
 
 class NameForm(forms.Form):
-    country = forms.CharField(label='Country:', max_length=100, required=False)
-    company = forms.CharField(label='Company:', max_length=100, required=False)
+    #country = forms.CharField(label='Country:', max_length=100, required=False)
+    #company = forms.CharField(label='Company:', max_length=100, required=False)
     industry = forms.CharField(label='Industry:', max_length=100, required=False)
     segment_Spezialication = forms.CharField(label='Segment/Spezialication:', max_length=100, required=False)
     main_Market = forms.CharField(label='Main Market:', max_length=100, required=False)
@@ -33,15 +33,12 @@ class DateInput(forms.DateInput):
       input_type = 'date'
 
 
-
 class DateForm(forms.Form):
       date = forms.DateField(label='From ', required= False, widget=DateInput)
       date = forms.DateField(label=' | ', required= False, widget=DateInput)
-      #country = forms.CharField(label='Country:',max_length=100, required=False)
-      #company = forms.CharField(label='Company:', max_length=100, required=False)
-
+   
 
 class MyModelForm(forms.ModelForm):
     class Meta:
         model = MyModel
-        fields = ['color']
+        fields = ['Companies' , 'Countries']

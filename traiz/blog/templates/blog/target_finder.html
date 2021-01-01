@@ -12,6 +12,8 @@
                                                
                                                 <div id="div1_1">
                                                     {% csrf_token %}
+                                                    {{ model|crispy }}
+
                                                     {{ form|crispy }}
                                                     {{ date }}
                                                     {{ form.color }}
