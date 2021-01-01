@@ -5,12 +5,12 @@ import csv
 from blog import models
 from .models import MyModel
 import pandas as pd
-
+data_updated=pd.read_excel("updated.xlsx")
 countries_var=""
 company=""
 keyword_Search=""
 
-#Infocator global variables 
+#Infocator global variables
 charrty = ""
 alternativeEngines = ""
 capacityIncrease = ""
@@ -32,9 +32,9 @@ varialecompanyLaunch = ""
 varialecorporateFinance = ""
 varialecorporateMA = ""
 varialehumanResource = ""
-varialepresicionTechnology = "" 
+varialepresicionTechnology = ""
 varialeinnovation = ""
-varialeproductLaunches = "" 
+varialeproductLaunches = ""
 varialeproductUpgrades = ""
 varialereporting = ""
 varialestrategy = ""
@@ -78,7 +78,7 @@ def dash_board(request):
             date1= request.POST.getlist('date') # retruns the timefram as ['date', 'date']
             print(date1)
             print(request.POST)
-            
+
 
     else:
          date = DateForm()
@@ -132,8 +132,8 @@ def results(request):        # if this is a POST request we need to process the 
             productUpgrades = char_1['productUpgrades']
             reporting =  char_1['reporting']
             strategy = char_1['strategy']
-          
-           
+
+
                #print( 'alliance:' + str(request.POST.getlist('alliances')))
         if request.POST.getlist('alliances'):
                     varialeAlliance = 'Alliance'
@@ -199,10 +199,10 @@ def results(request):        # if this is a POST request we need to process the 
         if request.POST.getlist('Industry'):
                     varialeIndustry = 'Industry'
                     Indicator_RESULT.append(varialeIndustry)
-    
-                
+
+
         print(Indicator_RESULT)
-        
+
 
 
     else:
@@ -213,7 +213,7 @@ def results(request):        # if this is a POST request we need to process the 
 
     return render(request, 'blog/results.html', {
         'date' : date,
-        'char_1': char_1, 
+        'char_1': char_1,
     })
 
 
@@ -231,7 +231,7 @@ def target_finder(request):
 
 
         if form.is_valid() or char_1.is_valid() or model.is_valid():
-              
+
                 industry = form.cleaned_data['industry']
                 segment_Spezialication = form.cleaned_data['segment_Spezialication']
                 main_Market = form.cleaned_data['main_Market']
@@ -239,7 +239,7 @@ def target_finder(request):
                 Keys_FORM.append(keyword_Search.split(","))
                 countries_var = request.POST.getlist('Countries')
                 company_var = request.POST.getlist('Companies')
-            
+
                 #Variable_FORM[0]=countries_var
                 #Variable_FORM.append(countries_var)
                 Variable_FORM.append([countries_var[0],company_var[0]])
@@ -260,7 +260,7 @@ def target_finder(request):
                 reporting =  char_1['reporting']
                 strategy = char_1['strategy']
 
-               
+
 
 
                 #print(country)
@@ -269,7 +269,7 @@ def target_finder(request):
                 #print(segment_Spezialication)
                 #print(main_Market)
                 #print(keyword_Search)
-                
+
 
                 #print(request.POST)
                 #print( 'alliance:' + str(request.POST.getlist('alliances')))
@@ -325,7 +325,7 @@ def target_finder(request):
                 if request.POST.getlist('strategy'):
                     varialestrategy = 'Strategy'
                     Indicator_FORM.append(varialestrategy)
-                
+
                 if request.POST.getlist('Negative_Development'):
                     varialeNegaive = 'Negative Development'
                     Indicator_FORM.append(varialeNegaive)
@@ -337,10 +337,10 @@ def target_finder(request):
                 if request.POST.getlist('Industry'):
                     varialeIndustry = 'Industry'
                     Indicator_FORM.append(varialeIndustry)
-                
+
                 #Indicator_FORM.append([varialeAlliance[0], varialealternativeEngines[0], varialecapacityIncrease[0], varialecompanyLaunch[0], varialecorporateFinance[0], varialecorporateMA, varialehumanResource, varialepresicionTechnology, varialeinnovation, varialeproductLaunches, varialeproductUpgrades, varialereporting, varialestrategy])
-                
-                pri()
+
+                integration()
 
                 return redirect('/results/')
 
@@ -354,15 +354,16 @@ def target_finder(request):
 
     return render(request, 'blog/target_finder.html', {
         'form': form,
-        'char_1': char_1, 
+        'char_1': char_1,
         'model' : model
     })
 
-def pri():
+
+def integration():
     print(Variable_FORM)
     print(Keys_FORM)
     print(Indicator_FORM)
+    print(data_updated)
     del Variable_FORM[0]
     del Keys_FORM[0]
     del Indicator_FORM[0:]
-
