@@ -6,9 +6,47 @@ from blog import models
 from .models import MyModel
 import pandas as pd
 
+countries_var=""
+company=""
+keyword_Search=""
+
+#Infocator global variables 
+charrty = ""
+alternativeEngines = ""
+capacityIncrease = ""
+companyLaunch = ""
+corporateFinance = ""
+corporateMA = ""
+humanResource = ""
+presicionTechnology = ""
+innovation = ""
+productLaunches = ""
+productUpgrades = ""
+reporting =  ""
+strategy = ""
+
+varialeAlliance = ""
+varialealternativeEngines = ""
+varialecapacityIncrease = ""
+varialecompanyLaunch = ""
+varialecorporateFinance = ""
+varialecorporateMA = ""
+varialehumanResource = ""
+varialepresicionTechnology = "" 
+varialeinnovation = ""
+varialeproductLaunches = "" 
+varialeproductUpgrades = ""
+varialereporting = ""
+varialestrategy = ""
+varialeNegaive = ""
+varialePositive = ""
+varialeIndustry = ""
 
 
-
+Variable_FORM=[]
+Keys_FORM=[]
+Indicator_FORM =[]
+Indicator_RESULT = []
 
 #context = {'primary_type': primary_type, 'columns': columns}
 #df2 = pd.read_csv("blog\Company_data_base.CSV")
@@ -95,60 +133,76 @@ def results(request):        # if this is a POST request we need to process the 
             reporting =  char_1['reporting']
             strategy = char_1['strategy']
           
-
            
-            if request.POST.getlist('alliances'):
+               #print( 'alliance:' + str(request.POST.getlist('alliances')))
+        if request.POST.getlist('alliances'):
                     varialeAlliance = 'Alliance'
-                    print('Indicator:' + varialeAlliance)
+                    Indicator_RESULT.append(varialeAlliance)
 
-            if request.POST.getlist('alternativeEngines'):
+        if request.POST.getlist('alternativeEngines'):
                     varialealternativeEngines = 'Alternative Engines'
-                    print('Indicator:' + varialealternativeEngines)
+                    Indicator_RESULT.append(varialealternativeEngines)
 
-            if request.POST.getlist('capacityIncrease'):
+
+        if request.POST.getlist('capacityIncrease'):
                     varialecapacityIncrease = 'Capacity Increase'
-                    print('Indicator:' + varialecapacityIncrease )
+                    Indicator_RESULT.append(varialecapacityIncrease)
 
-            if request.POST.getlist('companyLaunch'):
+        if request.POST.getlist('companyLaunch'):
                     varialecompanyLaunch = 'Company Launch'
-                    print('Indicator:' + varialecompanyLaunch)
+                    Indicator_RESULT.append(varialecompanyLaunch)
 
-            if request.POST.getlist('corporateFinance'):
+        if request.POST.getlist('corporateFinance'):
                     varialecorporateFinance = 'Corporate Finance'
-                    print('Indicator:' + varialecorporateFinance )
+                    Indicator_RESULT.append(varialecorporateFinance)
 
-            if request.POST.getlist('corporateMA'):
+        if request.POST.getlist('corporateMA'):
                     varialecorporateMA = 'Corporate M&A'
-                    print('Indicator:' + varialecorporateMA )
+                    Indicator_RESULT.append(varialecorporateMA)
 
-            if request.POST.getlist('humanResource'):
+        if request.POST.getlist('humanResource'):
                     varialehumanResource = 'Human Resource'
-                    print('Indicator:' + varialehumanResource )
+                    Indicator_RESULT.append(varialehumanResource)
 
-            if request.POST.getlist('presicionTechnology'):
+        if request.POST.getlist('presicionTechnology'):
                     varialepresicionTechnology = 'Presicion Technology'
-                    print('Indicator:' + varialepresicionTechnology )
+                    Indicator_RESULT.append(varialepresicionTechnology)
 
-            if request.POST.getlist('innovation'):
+        if request.POST.getlist('innovation'):
                     varialeinnovation = 'Innovation'
-                    print('Indicator:' + varialeinnovation )
+                    Indicator_RESULT.append(varialeinnovation)
 
-            if request.POST.getlist('productLaunches'):
+        if request.POST.getlist('productLaunches'):
                     varialeproductLaunches = 'Product Launch'
-                    print('Indicator:' + varialeproductLaunches )
+                    Indicator_RESULT.append(varialeproductLaunches)
 
-            if request.POST.getlist('productUpgrades'):
+        if request.POST.getlist('productUpgrades'):
                     varialeproductUpgrades = 'Product Upgrade'
-                    print('Indicator:' + varialeproductUpgrades )
+                    Indicator_RESULT.append(varialeproductUpgrades)
 
-            if request.POST.getlist('reporting'):
+        if request.POST.getlist('reporting'):
                     varialereporting = 'Reporting'
-                    print('Indicator:' + varialereporting )
+                    Indicator_RESULT.append(varialereporting)
 
-            if request.POST.getlist('strategy'):
+        if request.POST.getlist('strategy'):
                     varialestrategy = 'Strategy'
-                    print('Indicator:' + varialestrategy)
+                    Indicator_RESULT.append(varialestrategy)
 
+        if request.POST.getlist('Negative_Development'):
+                    varialeNegaive = 'Negative Development'
+                    Indicator_RESULT.append(varialeNegaive)
+
+        if request.POST.getlist('Positive_Development'):
+                    varialePositive = 'Positive Development'
+                    Indicator_RESULT.append(varialePositive)
+
+        if request.POST.getlist('Industry'):
+                    varialeIndustry = 'Industry'
+                    Indicator_RESULT.append(varialeIndustry)
+    
+                
+        print(Indicator_RESULT)
+        
 
 
     else:
@@ -163,11 +217,7 @@ def results(request):        # if this is a POST request we need to process the 
     })
 
 
-country=""
-company=""
-keyword_Search=""
-Variable_FORM=[]
-Keys_FORM=[]
+
 
 def target_finder(request):
     # if this is a POST request we need to process the form data
@@ -181,9 +231,7 @@ def target_finder(request):
 
 
         if form.is_valid() or char_1.is_valid() or model.is_valid():
-                #Variable_FORM[0]=country
-                #Variable_FORM.append(country)
-                Variable_FORM.append([country,company])
+              
                 industry = form.cleaned_data['industry']
                 segment_Spezialication = form.cleaned_data['segment_Spezialication']
                 main_Market = form.cleaned_data['main_Market']
@@ -191,8 +239,10 @@ def target_finder(request):
                 Keys_FORM.append(keyword_Search.split(","))
                 countries_var = request.POST.getlist('Countries')
                 company_var = request.POST.getlist('Companies')
-                print(company_var)
-                print(countries_var)
+            
+                #Variable_FORM[0]=countries_var
+                #Variable_FORM.append(countries_var)
+                Variable_FORM.append([countries_var[0],company_var[0]])
 
 
 
@@ -210,6 +260,8 @@ def target_finder(request):
                 reporting =  char_1['reporting']
                 strategy = char_1['strategy']
 
+               
+
 
                 #print(country)
                 #print(company)
@@ -217,61 +269,78 @@ def target_finder(request):
                 #print(segment_Spezialication)
                 #print(main_Market)
                 #print(keyword_Search)
-                pri()
+                
 
                 #print(request.POST)
                 #print( 'alliance:' + str(request.POST.getlist('alliances')))
                 if request.POST.getlist('alliances'):
                     varialeAlliance = 'Alliance'
-                    print('Indicator:' + varialeAlliance)
+                    Indicator_FORM.append(varialeAlliance)
 
                 if request.POST.getlist('alternativeEngines'):
                     varialealternativeEngines = 'Alternative Engines'
-                    print('Indicator:' + varialealternativeEngines)
+                    Indicator_FORM.append(varialealternativeEngines)
+
 
                 if request.POST.getlist('capacityIncrease'):
                     varialecapacityIncrease = 'Capacity Increase'
-                    print('Indicator:' + varialecapacityIncrease )
+                    Indicator_FORM.append(varialecapacityIncrease)
 
                 if request.POST.getlist('companyLaunch'):
                     varialecompanyLaunch = 'Company Launch'
-                    print('Indicator:' + varialecompanyLaunch)
+                    Indicator_FORM.append(varialecompanyLaunch)
 
                 if request.POST.getlist('corporateFinance'):
                     varialecorporateFinance = 'Corporate Finance'
-                    print('Indicator:' + varialecorporateFinance )
+                    Indicator_FORM.append(varialecorporateFinance)
 
                 if request.POST.getlist('corporateMA'):
                     varialecorporateMA = 'Corporate M&A'
-                    print('Indicator:' + varialecorporateMA )
+                    Indicator_FORM.append(varialecorporateMA)
 
                 if request.POST.getlist('humanResource'):
                     varialehumanResource = 'Human Resource'
-                    print('Indicator:' + varialehumanResource )
+                    Indicator_FORM.append(varialehumanResource)
 
                 if request.POST.getlist('presicionTechnology'):
                     varialepresicionTechnology = 'Presicion Technology'
-                    print('Indicator:' + varialepresicionTechnology )
+                    Indicator_FORM.append(varialepresicionTechnology)
 
                 if request.POST.getlist('innovation'):
                     varialeinnovation = 'Innovation'
-                    print('Indicator:' + varialeinnovation )
+                    Indicator_FORM.append(varialeinnovation)
 
                 if request.POST.getlist('productLaunches'):
                     varialeproductLaunches = 'Product Launch'
-                    print('Indicator:' + varialeproductLaunches )
+                    Indicator_FORM.append(varialeproductLaunches)
 
                 if request.POST.getlist('productUpgrades'):
                     varialeproductUpgrades = 'Product Upgrade'
-                    print('Indicator:' + varialeproductUpgrades )
+                    Indicator_FORM.append(varialeproductUpgrades)
 
                 if request.POST.getlist('reporting'):
                     varialereporting = 'Reporting'
-                    print('Indicator:' + varialereporting )
+                    Indicator_FORM.append(varialereporting)
 
                 if request.POST.getlist('strategy'):
                     varialestrategy = 'Strategy'
-                    print('Indicator:' + varialestrategy)
+                    Indicator_FORM.append(varialestrategy)
+                
+                if request.POST.getlist('Negative_Development'):
+                    varialeNegaive = 'Negative Development'
+                    Indicator_FORM.append(varialeNegaive)
+
+                if request.POST.getlist('Positive_Development'):
+                    varialePositive = 'Positive Development'
+                    Indicator_FORM.append(varialePositive)
+
+                if request.POST.getlist('Industry'):
+                    varialeIndustry = 'Industry'
+                    Indicator_FORM.append(varialeIndustry)
+                
+                #Indicator_FORM.append([varialeAlliance[0], varialealternativeEngines[0], varialecapacityIncrease[0], varialecompanyLaunch[0], varialecorporateFinance[0], varialecorporateMA, varialehumanResource, varialepresicionTechnology, varialeinnovation, varialeproductLaunches, varialeproductUpgrades, varialereporting, varialestrategy])
+                
+                pri()
 
                 return redirect('/results/')
 
@@ -292,5 +361,8 @@ def target_finder(request):
 def pri():
     print(Variable_FORM)
     print(Keys_FORM)
+    print(Indicator_FORM)
     del Variable_FORM[0]
     del Keys_FORM[0]
+    del Indicator_FORM[0:]
+

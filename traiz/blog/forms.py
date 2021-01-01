@@ -23,7 +23,9 @@ class Proritize_Indicato(forms.ModelForm):
     productUpgrades = forms.BooleanField(label='Product Upgrades', required=False )
     reporting = forms.BooleanField(label='Reporting', required=False)
     strategy = forms.BooleanField(label='Strategy', required=False)
-
+    Negative_Development = forms.BooleanField(label='Negative Development', required=False)
+    Positive_Development = forms.BooleanField(label='Positive Development', required=False)
+    Industry = forms.BooleanField(label='Industry', required=False)
     class Meta:
       model = Target_Finder_Input
       fields = ('alliances', )
