@@ -6,28 +6,29 @@
 {% block content %}
 {% load crispy_forms_tags %}
 
-
-
-
-
 <div id="Timeline">
             <div>
-                <h5>Select a time frame:</h5>
-                <form method="Post">
-                    <div>
-                    {% csrf_token %}
-                    {{ date.date }}
-                        {{ date }}
-                    </div>
+
+               <!-- <h5>Select a time frame:</h5> -->
+                        
+                                {% csrf_token %}
+                                {% for item, item2 in value %}
+                                    <a type="submit" method="post" name="Datemholen" href="/results/"   id="show_worldcloud"  value='{{ item2 }}'>{{ item }}<u id="text_worldcloud"> show wordcloud </u></a>
+                                    <p value='{{ item }}'>{{ item2 }}</p>
+                                    <button type="submit"></button>
+                                {% endfor %} 
+
+                     
+                     <div>
+                            {% csrf_token %}
+                            {{ date.date }}
+                            {{ date }} 
+                    </div> 
                     <div>
                         <p>Word Cloud Visualisation & Company Listing</p>
+                        
 
-                        <ul> 
-                            {% for item, item2 in value %}
-                            <button  type="submit" value='{{ item2 }}'>{{ item }} + show wordcloud</button>
-                            <p value='{{ item }}'>{{ item2 }}</p>
-                            {% endfor %}                 
-                        </ul>
+                      
 
                       
                            
@@ -46,6 +47,12 @@
             </div>  
             <br>          
 </div>
+
+<script>
+    function myFunction() {
+  var x = document.getElementById("show_worldcloud").innerHTML};
+  console.log(x)
+</script>
 
 
 

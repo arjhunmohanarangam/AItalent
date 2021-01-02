@@ -1,6 +1,10 @@
 from django import forms
 from blog.models import Target_Finder_Input, MyModel
 
+class Worldcloud(forms.Form):
+   worldCloudContent = forms.CharField(label='Industry:', max_length=100, required=False)
+
+
 class NameForm(forms.Form):
     #country = forms.CharField(label='Country:', max_length=100, required=False)
     #company = forms.CharField(label='Company:', max_length=100, required=False)

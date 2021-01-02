@@ -218,6 +218,15 @@ margin-left: 25px;
 
 }
 
+#text_worldcloud{
+  color: #316F73;
+}
+
+#show_worldcloud{
+  background-color: #316F73;
+  color: white;
+}
+
 /* -------- dashboard page -------------*/
 
 #dashboard_div_eins{

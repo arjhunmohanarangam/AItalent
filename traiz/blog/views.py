@@ -12,7 +12,7 @@ from wordcloud import WordCloud, STOPWORDS
 import io
 import urllib, base64
 import json
-
+from html.parser import HTMLParser
 
 data_updated=pd.read_excel("blog/updated.xlsx")
 countries_var=""
@@ -122,121 +122,39 @@ def notification(request):
 
 def results(request):        # if this is a POST request we need to process the form data
         # if this is a POST request we need to process the form data
-    if request.method == 'GET':
-        integration()
-        return comcloud
+    #if request.method == 'GET':
+     #   integration()
+      #  return comcloud
+    print(request.POST)
+    print('result')
 
-    if request.method == 'POST':
+    if request.method == "POST":
+        print(request.POST)
+        print("post")
+
+
+    if request.method == 'GET':
         date = DateForm(request.POST)
         char_1 = Proritize_Indicato(request.POST)
         print(request.POST)
-
-
-        if date.is_valid() or char_1.is_valid() :
-            print('input from result page:')
-            date1= request.POST.getlist('date')
-            date2 = request.POST.getlist('date2')
-            print(date1)
-            charrty = char_1['alliances']
-            alternativeEngines = char_1['alternativeEngines']
-            capacityIncrease = char_1['capacityIncrease']
-            companyLaunch = char_1['companyLaunch']
-            corporateFinance = char_1['corporateFinance']
-            corporateMA = char_1['corporateMA']
-            humanResource = char_1['humanResource']
-            presicionTechnology = char_1['presicionTechnology']
-            innovation = char_1['innovation']
-            productLaunches = char_1['productLaunches']
-            productUpgrades = char_1['productUpgrades']
-            reporting =  char_1['reporting']
-            strategy = char_1['strategy']
-
-
-               #print( 'alliance:' + str(request.POST.getlist('alliances')))
-        if request.POST.getlist('alliances'):
-                    varialeAlliance = 'Alliance'
-                    Indicator_RESULT.append(varialeAlliance)
-
-        if request.POST.getlist('alternativeEngines'):
-                    varialealternativeEngines = 'Alternative Engines'
-                    Indicator_RESULT.append(varialealternativeEngines)
-
-
-        if request.POST.getlist('capacityIncrease'):
-                    varialecapacityIncrease = 'Capacity Increase'
-                    Indicator_RESULT.append(varialecapacityIncrease)
-
-        if request.POST.getlist('companyLaunch'):
-                    varialecompanyLaunch = 'Company Launch'
-                    Indicator_RESULT.append(varialecompanyLaunch)
-
-        if request.POST.getlist('corporateFinance'):
-                    varialecorporateFinance = 'Corporate Finance'
-                    Indicator_RESULT.append(varialecorporateFinance)
-
-        if request.POST.getlist('corporateMA'):
-                    varialecorporateMA = 'Corporate M&A'
-                    Indicator_RESULT.append(varialecorporateMA)
-
-        if request.POST.getlist('humanResource'):
-                    varialehumanResource = 'Human Resource'
-                    Indicator_RESULT.append(varialehumanResource)
-
-        if request.POST.getlist('presicionTechnology'):
-                    varialepresicionTechnology = 'Presicion Technology'
-                    Indicator_RESULT.append(varialepresicionTechnology)
-
-        if request.POST.getlist('innovation'):
-                    varialeinnovation = 'Innovation'
-                    Indicator_RESULT.append(varialeinnovation)
-
-        if request.POST.getlist('productLaunches'):
-                    varialeproductLaunches = 'Product Launch'
-                    Indicator_RESULT.append(varialeproductLaunches)
-
-        if request.POST.getlist('productUpgrades'):
-                    varialeproductUpgrades = 'Product Upgrade'
-                    Indicator_RESULT.append(varialeproductUpgrades)
-
-        if request.POST.getlist('reporting'):
-                    varialereporting = 'Reporting'
-                    Indicator_RESULT.append(varialereporting)
-
-        if request.POST.getlist('strategy'):
-                    varialestrategy = 'Strategy'
-                    Indicator_RESULT.append(varialestrategy)
-
-        if request.POST.getlist('Negative_Development'):
-                    varialeNegaive = 'Negative Development'
-                    Indicator_RESULT.append(varialeNegaive)
-
-        if request.POST.getlist('Positive_Development'):
-                    varialePositive = 'Positive Development'
-                    Indicator_RESULT.append(varialePositive)
-
-        if request.POST.getlist('Industry'):
-                    varialeIndustry = 'Industry'
-                    Indicator_RESULT.append(varialeIndustry)
-
-
-        print(Indicator_RESULT)
-
+        print("get")
 
 
     else:
         date = DateForm()
-        char_1 = Proritize_Indicato()
+            
 
 
 
     return render(request, 'blog/results.html', {
-        'date' : date,
-        'char_1': char_1,
+        "date": date
     })
 
 
 def target_finder(request):
     # if this is a POST request we need to process the form data
+    
+
     if request.method == 'POST':
         form = NameForm(request.POST)
         char_1 = Proritize_Indicato(request.POST)
@@ -355,18 +273,21 @@ def target_finder(request):
                     Indicator_FORM.append(varialeIndustry)
 
                 #Indicator_FORM.append([varialeAlliance[0], varialealternativeEngines[0], varialecapacityIncrease[0], varialecompanyLaunch[0], varialecorporateFinance[0], varialecorporateMA, varialehumanResource, varialepresicionTechnology, varialeinnovation, varialeproductLaunches, varialeproductUpgrades, varialereporting, varialestrategy])
-                a,b,c,d, e = integration()
+                a,b,c,d,e = integration()
+                print(request.POST)
 
 
                 #integration()
                 return render(request, 'blog/results.html', {
-                         'date' : date,
+                        'date' : date,
                         'char_1': char_1,
                         "comcloud": b,
                         "comnumber": c,
                         "comsignal": d, 
                         "value": e
                 })
+
+
 
     # if a GET (or any other method) we'll create a blank form
     else:
@@ -377,9 +298,9 @@ def target_finder(request):
 
 
     return render(request, 'blog/target_finder.html', {
-        'form': form,
-        'char_1': char_1,
-        'model' : model
+            'form': form,
+            'char_1': char_1,
+            'model' : model
 
     })
 
@@ -483,10 +404,11 @@ def integration():
         comnumber.append(i["Number_of_signals"])
         comsignal.append(i["Signal"])
 
-    print(comcloud)
-    print(comnumber)
-    print(comsignal)
+    #print(comcloud)
+    #print(comnumber)
+    #print(comsignal)
     # we need to install json 
+    #print(score_data)
 
     value=zip(comcloud, comsignal)
     return score_data, comcloud, comnumber, comsignal, value
@@ -535,10 +457,5 @@ def cloud_gen(request):
 
 def halloWelt():
         return [(score_data.Company_name, score_data.Number_of_signals)]
-
-
-
-
-
 
 
