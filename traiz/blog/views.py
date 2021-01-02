@@ -11,12 +11,18 @@ import re
 from wordcloud import WordCloud, STOPWORDS
 import io
 import urllib, base64
+import json
 
-data_updated=pd.read_excel("/Users/arjhunmohanarangam/Documents/GitHub/AItalents/traiz/blog/updated.xlsx")
+
+data_updated=pd.read_excel("blog/updated.xlsx")
 countries_var=""
 company=""
 keyword_Search=""
 
+# integration funtion global variables 
+selected_country_data= ""
+comcloud=""
+comsignal=""
 #Infocator global variables
 charrty = ""
 alternativeEngines = ""
@@ -116,9 +122,14 @@ def notification(request):
 
 def results(request):        # if this is a POST request we need to process the form data
         # if this is a POST request we need to process the form data
+    if request.method == 'GET':
+        integration()
+        return comcloud
+
     if request.method == 'POST':
         date = DateForm(request.POST)
         char_1 = Proritize_Indicato(request.POST)
+        print(request.POST)
 
 
         if date.is_valid() or char_1.is_valid() :
@@ -222,8 +233,6 @@ def results(request):        # if this is a POST request we need to process the 
         'date' : date,
         'char_1': char_1,
     })
-
-
 
 
 def target_finder(request):
@@ -346,10 +355,18 @@ def target_finder(request):
                     Indicator_FORM.append(varialeIndustry)
 
                 #Indicator_FORM.append([varialeAlliance[0], varialealternativeEngines[0], varialecapacityIncrease[0], varialecompanyLaunch[0], varialecorporateFinance[0], varialecorporateMA, varialehumanResource, varialepresicionTechnology, varialeinnovation, varialeproductLaunches, varialeproductUpgrades, varialereporting, varialestrategy])
+                a,b,c,d, e = integration()
 
-                integration()
-                return redirect('/results/')
 
+                #integration()
+                return render(request, 'blog/results.html', {
+                         'date' : date,
+                        'char_1': char_1,
+                        "comcloud": b,
+                        "comnumber": c,
+                        "comsignal": d, 
+                        "value": e
+                })
 
     # if a GET (or any other method) we'll create a blank form
     else:
@@ -358,14 +375,20 @@ def target_finder(request):
          model = MyModelForm()
 
 
+
     return render(request, 'blog/target_finder.html', {
         'form': form,
         'char_1': char_1,
         'model' : model
+
     })
 
 
+
+
 def integration():
+
+    
     #print(Variable_FORM)
     #print(Keys_FORM)
     #print(Indicator_FORM)
@@ -384,8 +407,21 @@ def integration():
     comp_name=[]
     number_signals=[]
     comp_score=[]
+    sig=[]
     for comp in unique_comp:
         df_Comp=result[result["Name (Organization)"]==comp]
+        #new code for listing the content 
+        textclo=[]
+        resl=df_Comp["Content"]
+        for txt in resl:
+            sent=sent_tokenize(txt)
+            #print(sent)
+            for sen in sent:
+                if sen not in textclo:
+                    textclo.append(sen)
+
+        #print(textclo)
+        sentan=" ".join(textclo)
         Sn=df_Comp["Name (Organization)"].count()
         for item in Indicator_FORM:
             item1=df_Comp[df_Comp["Name (Source Tag)"]== item]
@@ -396,6 +432,7 @@ def integration():
         comp_name.append(comp)
         number_signals.append(Sn)
         comp_score.append(score)
+        sig.append(sentan)
         #print("Bn value=",bn)
         #print("Sn value=",Sn)
         #print("Wn value=", Wn)
@@ -403,7 +440,10 @@ def integration():
         #print(score)
     data_new = {'Company_name':comp_name,
         'Number_of_signals':number_signals,
-        'Score':comp_score}#new dataframe for only the output
+        'Score':comp_score, 
+        'Signal':sig
+        }#new dataframe for only the output
+
     score_data = pd.DataFrame(data_new)
     score_data=score_data.sort_values(by=['Score'], ascending=False)
 
@@ -417,12 +457,39 @@ def integration():
     plt.savefig('books_read.png')
     #print(selected_company_data)
     score_data=score_data.drop(['Score'], axis=1)
+    score_data_new=score_data.drop(['Number_of_signals'], axis=1)
     print(score_data)
-    cloud("Claas")
+    #cloud("Claas")
     del Variable_FORM[0]
     del Keys_FORM[0]
     del Indicator_FORM[0:]
-    return score_data
+    #print(score_data.Company_name)
+    #print(score_data.Number_of_signals)
+    josonObject = score_data.to_json(orient="table")
+    parsed = json.loads(josonObject)
+    dumped = json.dumps(parsed, indent=4)
+
+    josonObject_new = score_data_new.to_json(orient="table")
+    parsed_new = json.loads(josonObject)
+    dumped_new = json.dumps(parsed, indent=4)
+
+    #print(parsed["data"])
+    comcloud = [] 
+    comnumber = []
+    comsignal = []
+
+    for i in parsed["data"]:
+        comcloud.append(i["Company_name"]) 
+        comnumber.append(i["Number_of_signals"])
+        comsignal.append(i["Signal"])
+
+    print(comcloud)
+    print(comnumber)
+    print(comsignal)
+    # we need to install json 
+
+    value=zip(comcloud, comsignal)
+    return score_data, comcloud, comnumber, comsignal, value
 
 def cloud(companyname):
     selected_country_data=data_updated[data_updated["Name (Country)"]==Variable_FORM[0][0]]
@@ -465,3 +532,13 @@ def cloud_gen(request):
 
     wordcloud = word_cloud(text)
     #return render(request, 'articles/index.html', {'wordcloud':wordcloud}
+
+def halloWelt():
+        return [(score_data.Company_name, score_data.Number_of_signals)]
+
+
+
+
+
+
+

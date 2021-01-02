@@ -744,3 +744,11 @@ Company_Chioces = [
 class MyModel(models.Model):
    Countries = models.CharField( max_length=300, choices=COLOR_CHOICES, default='--type in a Country name --')
    Companies = models.CharField( max_length=300, choices=Company_Chioces, default='--type in a Company name --')
+
+
+
+class Manors(models.Model):
+  #field declarations
+
+  def get_fields(self):
+    return [(score_data.Company_name, score_data.Number_of_signals)]

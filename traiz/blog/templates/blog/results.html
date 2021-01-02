@@ -1,6 +1,13 @@
-{% extends "blog/base.html"%}
+{% extends "blog/base.html"  %}
+{% include comcloud %}
+{% include comnumber %}
+{% include comsignal %}
+{% include value %}
 {% block content %}
 {% load crispy_forms_tags %}
+
+
+
 
 
 <div id="Timeline">
@@ -11,25 +18,33 @@
                     {% csrf_token %}
                     {{ date.date }}
                         {{ date }}
-
-
                     </div>
-                        <div id="resutls_viz">
-                                <p>Word Cloud Visualisation & Company Listing</p>
-                            </div>
+                    <div>
+                        <p>Word Cloud Visualisation & Company Listing</p>
+
+                        <ul> 
+                            {% for item, item2 in value %}
+                            <button  type="submit" value='{{ item2 }}'>{{ item }} + show wordcloud</button>
+                            <p value='{{ item }}'>{{ item2 }}</p>
+                            {% endfor %}                 
+                        </ul>
+
+                      
+                           
+                  <!--  </div> 
+                      
                             <div>
                                     <p class="box-überschrift">Prioritize Indicators:</p>
             
                                 {{ char_1|crispy }}   
                             </div>
 
-                        <button  id="start" type="submit">Start</button>
-                </form>
-            </div>  
-            <br>
-          
+                       <button  id="start" type="submit">Start</button>
+                </form> -->
+              
 
-                
+            </div>  
+            <br>          
 </div>
 
 
