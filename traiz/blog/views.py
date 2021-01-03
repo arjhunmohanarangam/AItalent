@@ -18,8 +18,8 @@ data_updated=pd.read_excel("blog/updated.xlsx")
 countries_var=""
 company=""
 keyword_Search=""
-
-# integration funtion global variables 
+v=0
+# integration funtion global variables
 selected_country_data= ""
 comcloud=""
 comsignal=""
@@ -120,7 +120,7 @@ def customer_care(request):
                         'char_1': char_1,
                         "comcloud": b,
                         "comnumber": c,
-                        "comsignal": d, 
+                        "comsignal": d,
                         "value": e
                 })
 
@@ -152,7 +152,7 @@ def results(request):        # if this is a POST request we need to process the 
 
     else:
         date = DateForm()
-            
+
 
 
 
@@ -163,7 +163,7 @@ def results(request):        # if this is a POST request we need to process the 
 
 def target_finder(request):
     # if this is a POST request we need to process the form data
-    
+
 
     if request.method == 'POST':
         form = NameForm(request.POST)
@@ -283,7 +283,7 @@ def target_finder(request):
                     Indicator_FORM.append(varialeIndustry)
 
                 #Indicator_FORM.append([varialeAlliance[0], varialealternativeEngines[0], varialecapacityIncrease[0], varialecompanyLaunch[0], varialecorporateFinance[0], varialecorporateMA, varialehumanResource, varialepresicionTechnology, varialeinnovation, varialeproductLaunches, varialeproductUpgrades, varialereporting, varialestrategy])
-                a,b,c,d,e = integration()
+                a,b,c,d,e,f = integration()
                 print(request.POST)
 
 
@@ -293,8 +293,9 @@ def target_finder(request):
                         'char_1': char_1,
                         "comcloud": b,
                         "comnumber": c,
-                        "comsignal": d, 
-                        "value": e
+                        "comsignal": d,
+                        "value": e,
+                        "compic":f
                 })
 
 
@@ -319,7 +320,7 @@ def target_finder(request):
 
 def integration():
 
-    
+
     #print(Variable_FORM)
     #print(Keys_FORM)
     #print(Indicator_FORM)
@@ -341,7 +342,7 @@ def integration():
     sig=[]
     for comp in unique_comp:
         df_Comp=result[result["Name (Organization)"]==comp]
-        #new code for listing the content 
+        #new code for listing the content
         textclo=[]
         resl=df_Comp["Content"]
         for txt in resl:
@@ -371,7 +372,7 @@ def integration():
         #print(score)
     data_new = {'Company_name':comp_name,
         'Number_of_signals':number_signals,
-        'Score':comp_score, 
+        'Score':comp_score,
         'Signal':sig
         }#new dataframe for only the output
 
@@ -405,56 +406,39 @@ def integration():
     dumped_new = json.dumps(parsed, indent=4)
 
     #print(parsed["data"])
-    comcloud = [] 
+    comcloud = []
     comnumber = []
     comsignal = []
-
+    compic=[]
     for i in parsed["data"]:
-        comcloud.append(i["Company_name"]) 
+        comcloud.append(i["Company_name"])
         comnumber.append(i["Number_of_signals"])
         comsignal.append(i["Signal"])
 
+    for i  in comsignal:
+        design=cloud(i)
+        compic.append(design)
     #print(comcloud)
     #print(comnumber)
     #print(comsignal)
-    # we need to install json 
+    # we need to install json
     #print(score_data)
+    #print(v)
+    value=zip(comcloud, comsignal,compic)
+    #print(value)
+    return score_data, comcloud, comnumber, comsignal, value,compic
 
-    value=zip(comcloud, comsignal)
-    return score_data, comcloud, comnumber, comsignal, value
-
-def cloud(companyname):
-    selected_country_data=data_updated[data_updated["Name (Country)"]==Variable_FORM[0][0]]
-    selected_company_data=selected_country_data[selected_country_data["Name (Organization)"]==companyname]
-    result = pd.DataFrame()
-    #print(Indicator_FORM)
-    for i in Indicator_FORM:
-        dada=selected_company_data[selected_company_data["Name (Source Tag)"]== i]
-        #print(dada)
-        result=pd.concat([result,dada])
-    #print(result["Content"])
-    textclo=[]
-    resl=result["Content"]
-    for txt in resl:
-        sent=sent_tokenize(txt)
-        #print(sent)
-        for sen in sent:
-            textclo.append(sen)
-    #print(textclo)
-    sentan=" ".join(textclo)
-    #print(sentan)
-    #text = re.sub(r'==.*?==+', '', sentan)
-    #plt.figure(figsize=(40, 30))
-    wc = WordCloud().generate(sentan)
+def cloud(sentence):
+    wc = WordCloud().generate(sentence)
     plt.figure(figsize=(40, 30))
     plt.imshow(wc, interpolation='bilinear')
     plt.axis("off")
-    plt.savefig('books_read1.png')
+    v=v+1
+    plt.savefig("books_read"+str(v)+".png")
     image = io.BytesIO()
     plt.savefig(image, format='png')
     image.seek(0)  # rewind the data
     string = base64.b64encode(image.read())
-
     image_64 = 'data:image/png;base64,' + urllib.parse.quote(string)
     return image_64
 
@@ -467,5 +451,3 @@ def cloud_gen(request):
 
 def halloWelt():
         return [(score_data.Company_name, score_data.Number_of_signals)]
-
-

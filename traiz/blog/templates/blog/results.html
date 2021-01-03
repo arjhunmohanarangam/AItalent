@@ -10,42 +10,43 @@
             <div>
 
                <!-- <h5>Select a time frame:</h5> -->
-                        
+
                                 {% csrf_token %}
-                                {% for item, item2 in value %}
+                                {% for item, item2, item3 in value %}
                                     <a type="submit" method="post" name="Datenholen" href="/customer_care/"   id="show_worldcloud"  value='{{ item2 }}'>{{ item }}<u id="text_worldcloud"> show wordcloud </u></a>
                                     <p value='{{ item }}'>{{ item2 }}</p>
+                                    <p>{{item3}}</p>
                                     <button type="submit"></button>
-                                {% endfor %} 
+                                {% endfor %}
 
-                     
+
                      <div>
                             {% csrf_token %}
                             {{ date.date }}
-                            {{ date }} 
-                    </div> 
+                            {{ date }}
+                    </div>
                     <div>
                         <p>Word Cloud Visualisation & Company Listing</p>
-                        
 
-                      
 
-                      
-                           
-                  <!--  </div> 
-                      
+
+
+
+
+                  <!--  </div>
+
                             <div>
                                     <p class="box-überschrift">Prioritize Indicators:</p>
-            
-                                {{ char_1|crispy }}   
+
+                                {{ char_1|crispy }}
                             </div>
 
                        <button  id="start" type="submit">Start</button>
                 </form> -->
-              
 
-            </div>  
-            <br>          
+
+            </div>
+            <br>
 </div>
 
 <script>
