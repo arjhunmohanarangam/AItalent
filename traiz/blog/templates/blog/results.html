@@ -7,6 +7,9 @@
 {% load crispy_forms_tags %}
 {% load static %}
 
+<h1>Results</h1>
+<h4>Company Listing and Worldcloud Visualization</h4>
+<p>Note that Companies that are related to a specific Country and Indicator can have the same Output paragraphe.</p>
 <div id="Timeline">
             <div>
 
@@ -14,21 +17,20 @@
 
                                 {% csrf_token %}
                                 {% for item, item2, item3 in value %}
-                                    <a type="submit" method="post" name="Datenholen" href="/customer_care/"   id="show_worldcloud"  value='{{ item2 }}'>{{ item }}<u id="text_worldcloud"> show wordcloud </u></a>
-                                    <p value='{{ item }}'>{{ item2 }}</p>
-                                    <p>{{item3}}</p>
-                                    <img src="{% get_static_prefix %}/images/books_read{{item3}}.png" alt="Girl in a jacket" width="500" height="600">
-                                    <button type="submit"></button>
+                                <div id="Rahmen" >
+                                        <div id="FirmaUndText" >
+                                            <h5>{{item3}}.</h5>
+                                            <a type="submit" method="post" name="Datenholen" id="show_worldcloud"  value='{{ item2 }}'>{{ item }}<u id="text_worldcloud"> show wordcloud </u></a>
+                                            <p value='{{ item }}'>{{ item2 }}</p>
+                                        </div>
+
+                                                <div id="alleBilder">
+                                                        <img src="{% get_static_prefix %}images/books_read{{item3}}.png" alt="Girl in a jacket" width="600" height="550">
+                                                </div>
+                                </div>
+
+                                <br></br>
                                 {% endfor %}
-
-
-                     <div>
-                            {% csrf_token %}
-                            {{ date.date }}
-                            {{ date }}
-                    </div>
-                    <div>
-                        <p>Word Cloud Visualisation & Company Listing</p>
 
 
 

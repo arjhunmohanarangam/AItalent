@@ -437,7 +437,7 @@ def cloud(sentence,val):
     plt.figure(figsize=(40, 30))
     plt.imshow(wc, interpolation='bilinear')
     plt.axis("off")
-    plt.savefig("/Users/arjhunmohanarangam/Documents/GitHub/AItalents/traiz/blog/static/images/books_read"+str(val)+".png")
+    plt.savefig("/Users/su-cl/Documents/IMD/AiTalents/Repo/AItalent/traiz/blog/static/images/books_read"+str(val)+".png")
     image = io.BytesIO()
     plt.savefig(image, format='png')
     image.seek(0)  # rewind the data
