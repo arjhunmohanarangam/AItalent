@@ -13,7 +13,7 @@
                         
                                 {% csrf_token %}
                                 {% for item, item2 in value %}
-                                    <a type="submit" method="post" name="Datemholen" href="/results/"   id="show_worldcloud"  value='{{ item2 }}'>{{ item }}<u id="text_worldcloud"> show wordcloud </u></a>
+                                    <a type="submit" method="post" name="Datenholen" href="/customer_care/"   id="show_worldcloud"  value='{{ item2 }}'>{{ item }}<u id="text_worldcloud"> show wordcloud </u></a>
                                     <p value='{{ item }}'>{{ item2 }}</p>
                                     <button type="submit"></button>
                                 {% endfor %} 

@@ -112,7 +112,17 @@ def license(request):
     return render(request, 'blog/license.html')
 
 def customer_care(request):
-    return render(request, 'blog/customer_care.html')
+
+    a,b,c,d,e = integration()
+
+    return render(request, 'blog/customer_care.html', {
+                        'date' : date,
+                        'char_1': char_1,
+                        "comcloud": b,
+                        "comnumber": c,
+                        "comsignal": d, 
+                        "value": e
+                })
 
 def notification(request):
     context={

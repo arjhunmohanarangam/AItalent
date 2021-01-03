@@ -1,4 +1,18 @@
 {% extends "blog/base.html"%}
+{% include comcloud %}
+
 {% block content %}
-    <h1>Customer Care</h1>
+
+
+    <h1>Wordclouds</h1>
+    <p>hello Wordclo</p>
+     <div id="Firmen_name">
+    {% csrf_token %}
+    {% for item in comcloud %}
+        <p value='{{ item }}'>{{ item }}</p>
+    {% endfor %} 
+   </div>
+
+ 
+
 {% endblock %}
