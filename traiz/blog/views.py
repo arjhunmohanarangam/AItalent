@@ -18,7 +18,7 @@ data_updated=pd.read_excel("blog/updated.xlsx")
 countries_var=""
 company=""
 keyword_Search=""
-v=0
+#v=0
 # integration funtion global variables
 selected_country_data= ""
 comcloud=""
@@ -336,6 +336,7 @@ def integration():
     unique_comp=result["Name (Organization)"].unique()
     #print(unique_comp)
     bn=0
+    v=0
     comp_name=[]
     number_signals=[]
     comp_score=[]
@@ -414,27 +415,29 @@ def integration():
         comcloud.append(i["Company_name"])
         comnumber.append(i["Number_of_signals"])
         comsignal.append(i["Signal"])
-
+    vara=[]
     for i  in comsignal:
-        design=cloud(i)
+        v+=1
+        design=cloud(i,v)
+        vara.append(v)
         compic.append(design)
+
     #print(comcloud)
     #print(comnumber)
     #print(comsignal)
     # we need to install json
     #print(score_data)
     #print(v)
-    value=zip(comcloud, comsignal,compic)
+    value=zip(comcloud, comsignal,vara)
     #print(value)
-    return score_data, comcloud, comnumber, comsignal, value,compic
+    return score_data, comcloud, comnumber, comsignal, value,vara
 
-def cloud(sentence):
+def cloud(sentence,val):
     wc = WordCloud().generate(sentence)
     plt.figure(figsize=(40, 30))
     plt.imshow(wc, interpolation='bilinear')
     plt.axis("off")
-    v=v+1
-    plt.savefig("books_read"+str(v)+".png")
+    plt.savefig("/Users/arjhunmohanarangam/Documents/GitHub/AItalents/traiz/blog/static/images/books_read"+str(val)+".png")
     image = io.BytesIO()
     plt.savefig(image, format='png')
     image.seek(0)  # rewind the data

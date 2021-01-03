@@ -5,6 +5,7 @@
 {% include value %}
 {% block content %}
 {% load crispy_forms_tags %}
+{% load static %}
 
 <div id="Timeline">
             <div>
@@ -16,6 +17,7 @@
                                     <a type="submit" method="post" name="Datenholen" href="/customer_care/"   id="show_worldcloud"  value='{{ item2 }}'>{{ item }}<u id="text_worldcloud"> show wordcloud </u></a>
                                     <p value='{{ item }}'>{{ item2 }}</p>
                                     <p>{{item3}}</p>
+                                    <img src="{% get_static_prefix %}/images/books_read{{item3}}.png" alt="Girl in a jacket" width="500" height="600">
                                     <button type="submit"></button>
                                 {% endfor %}
 
